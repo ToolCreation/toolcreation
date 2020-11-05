@@ -287,7 +287,7 @@ previewImage: function(e){
     let valor = 'idcurso='+id; 
     window.location.href = 'detailcurso.php?'+valor;
   },
- 
+  
   },
   
 });

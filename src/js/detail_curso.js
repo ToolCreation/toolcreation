@@ -93,6 +93,11 @@ const CLIENTE = new Vue({
     CLIENTE.messagealert = message;
     CLIENTE.alerticon = iconName;
         },
+  gotoPay: function(){
+    console.log("ire a pagar")
+    window.location.href = 'comprar.php';
   },
+  },
+  
   
 });

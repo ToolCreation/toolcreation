@@ -32,80 +32,30 @@ session_start();
               <button id="btn-menu-principal" class="btn-menu-principal"><i class="fas fa-bars"></i></button> 
               <div><input type="text" id="idUsuario" style="display: none" value="<?php echo  $_SESSION['status']  ?>" ></div>
         </header>
-            <div style="">
+            <div style="display: none">
                <input type="text" name="" id="fechaNacimiento" value="<?php  echo  $_SESSION['FNacimiento'];?>" >  
                <input type="text" name="" id="sexoUser" value="<?php  echo  $_SESSION['sexo'];?>" >   
                <input type="text" name="" id="imagenUsuario" value="<?php  echo  $_SESSION['imagen'];?>" placehoder= "Imagen" >  
                <input type="text" name="" id="telefonoUser" value="<?php  echo  $_SESSION['telefono'];?>" placehoder= "Imagen" >   
                <input type="text" name="" id="idUser" value="<?php  echo  $_SESSION['ID_usuario'];?>" placehoder= "Imagen" > 
                <input type="text" name="" id="idPrefesor" value="<?php  echo  $_SESSION['idProfesor'];?>" placehoder= "Imagen" >  
-
-
-            </div>
+           </div>
         <?php
             require('sections/account_user.php');
         ?>
 
-        <footer>
-            <div class="footer-container">
-                <div class="footer-section">
-                    <img src="src/img/Logo-ToolCreatiion.png" width="150" height="90" alt="">
-                </div>
-                <div class="footer-section">
-                   <h3>Contenido</h3>
-                   <ul>
-                      <li><a href="#">Cursos</a></li>
-                      <li><a href="#">Especialidades</a></li>
-                      <li></li>
+        <?php 
+            require('sections/footer.php');
+        ?>
 
-                      <!-- <li><a class="btn-iamProfesor" href="#"> Quiero ser intructor</a></li> -->
-                   </ul>
-                </div>
-                <div class="footer-section">
-                   <h3>Cursos</h3>
-                   <ul>
-                      <li><a href="#">WEB</a></li>
-                      <li><a href="#">Móvil</a></li>
-                      <li><a href="#">Frontend</a></li>
-                      <li><a href="#">BackEnd</a></li>
-                   </ul>
-                </div>
-                <div class="footer-section">
-                   <h3>Cuenta</h3>
-                   <ul>
-                      <li><a href="./public/login.html">Iniciar Sesion</a></li>
-                      <li><a href="./public/register.html">Crear Cuenta</a></li>
-                      <li><a href="./politicas.php">Politicas</a></li>
-                      <li><a href="./terminos.php">Termino de uso</a></li>
-                   </ul>
-                </div>
-                <div class="footer-section">
-                   <h3>Redes sociales</h3>
-                   <ul class="social-footer">
-                      <li><a href="#"><i class="fab fa-facebook"></i></a></li>
-                      <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                      <li><a href="#"><i class="fab fa-github"></i></a></li>
-                      <li><a href="#"><i class="fab fa-youtube"></i></a></li>
-                   </ul>
-                </div>
-                <div class="footer-section">
-                   <h3>Sellos de confianza</h3>
-                   <ul class="social-footer">
-                      <li><img src="./src/img/norton-secured.png" alt="" width="100"></li>
-                      <li><img src="./src/img/Sello_comercio_electronico.png"  width="100" alt=""></li>
-                   </ul>
-                </div>
-             </div>
-        </footer>
-
-        <div class="my-modal-plataform" id="modal1" v-bind:style="showModal"> <!-- This is the background overlay -->
-         <div class="my-modal-content-plataform"> <!-- This is the actual modal/popup box -->
-            <!-- <span class="modal-close">&times;</span> -->
-            <h1>Bienvenido a ToolCreation como profesor! ✏️</h1>
-            <p>Nos da mucho gusto, que se haya unido a nuestra cumunidad de enseñanza para ser el medio entre el conocimiento y el estudiante. 🧑‍🎓</p>
-           <img src="src/img/profesor.svg" alt="" style="width: 38% ">
+         <div class="my-modal-plataform" id="modal1" v-bind:style="showModal"> <!-- This is the background overlay -->
+            <div class="my-modal-content-plataform"> <!-- This is the actual modal/popup box -->
+               <!-- <span class="modal-close">&times;</span> -->
+               <h1>Bienvenido a ToolCreation como profesor! ✏️</h1>
+               <p>Nos da mucho gusto, que se haya unido a nuestra cumunidad de enseñanza para ser el medio entre el conocimiento y el estudiante. 🧑‍🎓</p>
+            <img src="src/img/profesor.svg" alt="" style="width: 38% ">
+            </div>
          </div>
-      </div>
 
     </div>
      <!--============================================= SRC JS ==================================================-->

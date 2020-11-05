@@ -211,7 +211,7 @@ session_start();
            
         </section>
         
-        <footer>
+        <!-- <footer>
             <div class="footer-container">
                 <div class="footer-section">
                     <img src="src/img/Logo-ToolCreatiion.png" width="150" height="90" alt="">
@@ -222,8 +222,6 @@ session_start();
                       <li><a href="#">Cursos</a></li>
                       <li><a href="#">Especialidades</a></li>
                       <li></li>
-
-                      <!-- <li><a class="btn-iamProfesor" href="#"> Quiero ser intructor</a></li> -->
                    </ul>
                 </div>
                 <div class="footer-section">
@@ -261,7 +259,10 @@ session_start();
                    </ul>
                 </div>
              </div>
-        </footer>
+        </footer> -->
+        <?php
+          require('./sections/footer.php');
+        ?>
     </div>
      <!--============================================= SRC JS ==================================================-->
      <script src="src/js/axios.min.js"></script>

@@ -33,6 +33,19 @@ a {
 a:hover {
   text-decoration: none; }
 
+.input-text,
+.input-email,
+.input-number,
+.input-password, .input-select {
+  border: none;
+  background: #ebebeb;
+  padding: 13px 10px;
+  margin: 8px 12px 8px 0px;
+  border-radius: 3px;
+  font-size: 14px;
+  font-family: 'Poppins';
+  transition: all .1s ease; }
+
 .content-principal {
   width: 100%;
   height: 100vh;
@@ -1702,6 +1715,154 @@ th {
   width: 13rem;
   object-position: center; }
 
+/*
+ ------------------------[Apartado de curso] ----------------------------
+*/
+.search-curso {
+  padding: 3rem;
+  display: flex; }
+  .search-curso .section-search {
+    width: 25%;
+    display: flex;
+    flex-direction: column; }
+    .search-curso .section-search .header-search {
+      background: #00F2A6;
+      padding: 20px;
+      color: white; }
+    .search-curso .section-search .button-tecnology {
+      border: none;
+      background: white;
+      padding: 0.4rem 1.5rem;
+      -webkit-box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.39);
+      -moz-box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.39);
+      box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.39);
+      border-radius: 5px;
+      cursor: pointer;
+      margin: .5rem 0rem .5rem 0; }
+    .search-curso .section-search .button-search-curso {
+      border: none;
+      background: #FF7D36;
+      padding: 0.4rem 1.5rem;
+      -webkit-box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.39);
+      -moz-box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.39);
+      box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.39);
+      border-radius: 5px;
+      cursor: pointer;
+      margin: .5rem 0rem .5rem 0;
+      color: white; }
+  .search-curso .section-result-cursos {
+    width: 75%;
+    padding: 0 2.5rem; }
+
+.content-card-result {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; }
+
+.card-curso-result {
+  display: flex;
+  flex-direction: row;
+  margin: 1rem 1rem 0rem 0rem;
+  -webkit-box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.39);
+  -moz-box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.39);
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.39);
+  border-radius: 15px;
+  width: 45%; }
+  .card-curso-result .header-curso-result {
+    width: 40%;
+    background: #1d3557;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px; }
+    .card-curso-result .header-curso-result img {
+      width: 90%;
+      object-fit: cover;
+      object-position: center; }
+  .card-curso-result .body-curso-result {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 1rem;
+    width: 90%; }
+    .card-curso-result .body-curso-result img {
+      width: 40px;
+      height: 40px;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 100%;
+      border: 3px solid #c4c4c4;
+      margin: 10px 0; }
+    .card-curso-result .body-curso-result button {
+      text-align: center;
+      padding: 0.4rem 1.5rem;
+      background: #1d3557;
+      color: white; }
+    .card-curso-result .body-curso-result button:hover {
+      background: #274875; }
+
+/*
+ ------------------------[Fin apartado de curso] ----------------------------
+*/
+/*
+ ------------------------[Apartado de pago] ----------------------------
+*/
+.content-purchase {
+  padding: 3rem;
+  display: flex; }
+  .content-purchase .content-section-pay {
+    width: 40%;
+    display: flex;
+    flex-direction: column; }
+    .content-purchase .content-section-pay .credit-card {
+      padding: 10px;
+      -webkit-box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.39);
+      -moz-box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.39);
+      box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.39);
+      border-radius: 10px;
+      margin-top: 15px;
+      margin-bottom: 15px; }
+    .content-purchase .content-section-pay .detailPedido {
+      width: 100%; }
+      .content-purchase .content-section-pay .detailPedido .content-detail {
+        padding: 20px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center; }
+        .content-purchase .content-section-pay .detailPedido .content-detail img {
+          width: 40px;
+          height: 40px;
+          object-fit: cover;
+          object-position: center; }
+  .content-purchase .resumen-pago {
+    width: 60%;
+    margin: 2.5rem; }
+    .content-purchase .resumen-pago .content-resumen {
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      -webkit-box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.39);
+      -moz-box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.39);
+      box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.39);
+      border-radius: 10px; }
+      .content-purchase .resumen-pago .content-resumen .descripcion-precio {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-bottom: 20px; }
+      .content-purchase .resumen-pago .content-resumen .button-pay {
+        margin-top: 1rem;
+        border: none;
+        color: white;
+        background: #f87c4b;
+        padding: .8rem 3.5rem;
+        cursor: pointer;
+        border-radius: 5px; }
+
+/*
+ ------------------------[Fin apartado de pago] ----------------------------
+*/
 /*//////////////////////////////////////////////////////////////////
 [ Modal ]*/
 .my-modal-plataform {

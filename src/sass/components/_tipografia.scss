@@ -37,3 +37,17 @@
   a:hover{
     text-decoration: none;
   }
+
+  .input-text,
+  .input-email,
+  .input-number,
+  .input-password, .input-select {
+  border: none;
+  background: #ebebeb;
+  padding: 13px 10px;
+  margin: 8px 12px 8px 0px;
+  border-radius: 3px;
+  font-size: 14px;
+  font-family: 'Poppins';
+  transition: all .1s ease;
+    }
