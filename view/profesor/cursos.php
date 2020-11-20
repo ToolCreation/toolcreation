@@ -369,7 +369,7 @@ session_start();
     
      <script src="../../src/js/axios.min.js"></script>
      <script src="../../src/js/vue.js"></script>
-     <script src="https://momentjs.com/downloads/moment-with-locales.min.js"></script>
+    <script  src="../../src/plugins/moment-with-locales.min.js"></script>
      <script src="../../src/js/crud_cursos.js"></script>
      <script src="../../src/js/menu.js"></script>
      <script src="../../src/js/jquery-3.5.1.min.js"></script>

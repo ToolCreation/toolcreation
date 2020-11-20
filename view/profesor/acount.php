@@ -34,7 +34,7 @@ session_start();
     
      <script src="../../src/js/axios.min.js"></script>
      <script src="../../src/js/vue.js"></script>
-     <!-- <script src="https://momentjs.com/downloads/moment-with-locales.min.js"></script> -->
+     <!--<script src="src/plugins/moment-with-locales.min.js"></script> -->
      <script src="../../src/js/profesor_plataform.js"></script>
      <script src="../../src/js/menu.js"></script>
      <script src="../../src/js/profile.js"></script>

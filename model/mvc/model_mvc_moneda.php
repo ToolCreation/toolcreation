@@ -5,7 +5,6 @@ class MVCMoneda {
     private $id;
     private $nombreMoneda;
     private $valorMoneda;
-    protected $params;
     private $sql;
 
     public function setData( $nombreMoneda, $valorMoneda){
@@ -66,9 +65,9 @@ class MVCMoneda {
         $moneda = array();
         while( $row=mysqli_fetch_array($select) ){
             $moneda[] = array(
-               'id' =>  $row['Int_Id_Moneda'],
-               'nombreMoneda'  =>  $row['VchNombre_Moneda'],
-               'valor' =>  $row['Fl_Valor_Moneda']
+               'id' =>   utf8_encode($row['Int_Id_Moneda']),
+               'nombreMoneda'  =>   utf8_encode($row['VchNombre_Moneda']),
+               'valor' =>  utf8_encode( $row['Fl_Valor_Moneda'])
             );
         }
          $encabezado=array("moneda"=>$moneda);

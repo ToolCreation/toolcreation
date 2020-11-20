@@ -243,7 +243,7 @@ const CURSOS = new Vue({
         },
         irdetallecurso: function(id){
             let valor = 'idcurso='+id; 
-            window.location.href = 'tema.php?'+valor;
+            window.location.href = 'administrarcurso.php?'+valor;
         },
         toFormData: (obj, option) => {
             let fd = new FormData();
@@ -331,6 +331,7 @@ const CURSOS = new Vue({
                          .then(function (response) {
                             console.log(response);
                                 if(response.data == "1"){
+                                    sessionStorage.clear();
                                     window.location.href = "../../public/login.html";
                                 }else{
                                     CLOSE.alertMessage("myalert alert-fail","Hubo un error al  cerrar sesion" + response.data, "fas fa-times bg-fail");

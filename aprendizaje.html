@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aprendizaje</title>
+    <link rel="stylesheet" href="src/css/normalize.css">
+    <link rel="stylesheet" href="src/css/bootstrap.css">
+    <link rel="stylesheet" href="src/css/aprendizaje.css">
+    <link rel="stylesheet" href="src/icons/all.css">
+</head>
+<body>
+    <div id="container-learn">
+        <header class="navbar navbar-dark bg-dark">
+            <div class="container-nav-learn">
+                <div class="item-nav-1">
+                    <h2 style="color: aliceblue;">Titulo de curso</h2>
+                </div>
+                <div class="item-nav-2">
+                    <div class="container-progres-bar">
+                        <div class="progres-bar">
+                        </div>
+                    </div>
+                    <span style="color: aliceblue;"><i class="fas fa-trophy"></i>Progreso</span>
+                    
+                </div>
+            </div>
+          
+            
+        </header>
+      
+        <nav id="sidebar">
+            <button type="button" id="menuToggle" title="show menu">
+                <i class="fas fa-arrow-left"> </i>Contenido
+            </button>
+            <div class="header-sidebar">
+                <h3>Contenido del curso</h3>
+                <button type="button" id="btnClosed" class="close-sidebar">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="section-temas">
+                <a href="#">Nombre de tema</a>
+                <a href="#">Nombre de tema</a>
+                <a href="#">Nombre de tema</a>
+            </div>
+        </nav>
+      
+        <div class="">
+            <p>Apredizaje</p>
+        </div>
+    </div>
+    <script>
+        let sidebar = document.getElementById('sidebar');
+        let buttonMenu = document.getElementById('menuToggle')
+        let buttonClosed = document.getElementById('btnClosed');
+        buttonMenu.addEventListener('click', ()=>{
+            sidebar.classList.add('open');
+            buttonMenu.classList.add('d-none');
+        });
+
+        buttonClosed.addEventListener('click', ()=>{
+            sidebar.classList.remove('open');
+            buttonMenu.classList.remove('d-none');
+        })
+    </script>
+</body>
+</html>

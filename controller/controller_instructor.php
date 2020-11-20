@@ -16,8 +16,8 @@ switch($option){
         $profedorVerificado = $profesor->verificarSiEsProfesor();
         session_start();
         if($profedorVerificado == null){
-          $stateSesionProfesor =   $profesor->mostrarDatosDeLogeo();
-          var_dump($stateSesionProfesor);
+          $stateSesionProfesor =   $profesor->registrarNuevoProfesor();
+          // var_dump($stateSesionProfesor);
           if($stateSesionProfesor == 'ErrorRegistro'){
             echo json_encode(array("error"=>"NoseRegistro",
                                     "stateFunction"=>"FalloRegistro"));
@@ -25,7 +25,15 @@ switch($option){
             echo json_encode(array("error"=>"NoseEncontro",
                                     "stateFunction"=>"NoEncontre"));
           }else{
-            echo json_encode(array("success"=>"OK",
+            $_SESSION['idProfesor']        = $stateSesionProfesor[0];
+            $_SESSION['gradoConocimiento'] = $stateSesionProfesor[1];
+            $_SESSION['estancia']          = $stateSesionProfesor[2];
+            $_SESSION['profesor']          = "YES";
+            echo json_encode(array( "idProfesor"        => $stateSesionProfesor[0],
+                                    "gradoConocimiento" => $stateSesionProfesor[1],
+                                    "estancia"          => $stateSesionProfesor[1],
+                                    "profesor" =>   $_SESSION['profesor'] ,
+                                    "success"   => "OK",
                                     "stateFunction"=>"RegistradoYLogeado"));
           }
         }else{
@@ -38,8 +46,12 @@ switch($option){
                 $_SESSION['gradoConocimiento'] = $arrayDataProfesor[1];
                 $_SESSION['estancia']          = $arrayDataProfesor[2];
                 $_SESSION['profesor']          = "YES";
-                echo json_encode(array("success"=>'OK',
-                                      "stateFunction"=>"Logeado"));
+                echo json_encode(array( "idProfesor"        => $arrayDataProfesor[0],
+                                        "gradoConocimiento" => $arrayDataProfesor[1],
+                                        "estancia"          => $arrayDataProfesor[1],
+                                        "profesor" =>   $_SESSION['profesor'] ,
+                                        "success"=>'OK',
+                                        "stateFunction"=>"Logeado"));
             }
            
         }

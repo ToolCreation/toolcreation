@@ -1,0 +1,210 @@
+<div class="wrap-table100" id="wrap-table">
+                <div class="card">
+                <input class="input-search" type="text" name="" placeholder="Buscar video" id="searchVideos">
+
+                    <div class="card-header">
+                      
+                      <h3 class="table-h3">Tabla de Recursos</h3>
+
+                      <button class="btn btn-add " type="submit" data-toggle="modal" data-target="#insertModalRecurso" ><i class="fas fa-plus"></i> Agregar</button>
+     
+                    </div>
+                    <div class="card-body ">     
+                      <div class="js-pscroll">
+
+                      <table class="table table-striped table-hover">
+                        <thead>
+                          <tr>
+                            <th>Id</th>
+                            <th>Nombre </th>
+                            <th>url</th>  
+                            <th>Tipo </th>
+                          </tr>
+                         
+                        </thead>
+                            <tbody>
+                               <tr  v-for="(recurso, index) in listaRecursos" v-show="index >=  anteriorRecurso && index < siguienteRecurso" >
+                                  <td>{{recurso.idRecurso}}</td>
+                                  <td>{{recurso.nombreRecurso}}</td>
+                                  <td><a v-bind:href="recurso.URL" target="_blank">{{recurso.URL}}</a></td>
+                                  <td>{{recurso.tipoRecurso}}</td>
+                                  <td>
+                                    <button  type="button"  class="btn btn-success "  data-toggle="modal" data-target="#updateModalRecursos" @click= "setDatosRecurso(recurso)" ><i class="far fa-edit"></i> Editar</button>
+                                    <button type="button"  class="btn btn-delete " data-toggle="modal" data-target="#deleteModalRecurso" @click= "setDatosDeleteRecurso(recurso)"><i class="fas fa-trash-alt"></i>Eliminar</button>
+                                  </td>
+                                </tr>
+                            
+                        </tbody>
+                      </table>
+                    </div>
+                    </div>
+                    <nav aria-label="..." style="padding: 10px">
+                     <ul class="pagination">
+                        <li v-bind:class="ocultarMostrarAnteriorRecurso">
+                          <a class="page-link" href="#" tabindex="-1" aria-disabled="true" @click="prevRecurso">Anterior</a>
+                        </li>
+                        <li v-for="paginaRecurso in paginasRecursos" class="page-item">
+                          <a class="page-link" @click ="paginarRecursos(paginaRecurso)" href="#">{{paginaRecurso}}</a>
+                        </li>
+                        <li v-bind:class="ocultarMostrarSiguienteRecurso">
+                          <a class="page-link" href="#" @click="nextRecurso">Siguiente</a>
+                        </li>
+                      </ul>
+                   </nav>
+                </div>
+            </div>
+               
+    
+
+        <!-- Modal insertar recursos-->
+        <div class="modal fade" id="insertModalRecurso" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel"> Agregar Recurso</h3>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                   <form action="" class="">
+                       <div class="row">
+                          <div class="form-group col ">
+                              <label for="">Nombre</label>
+                              <input class="form-control" type="text" name="" id="insert-nombre-recurso">
+                          </div>
+                          
+                       </div>
+                       <div class="row">
+                          <div class="col">
+                            <div class="form-group ">
+                              <label for="">Seleccione el video</label>
+                              <select name="" class="form-control" id="insert-video-recurso">
+                                  <option value="0">Seleccione video</option>
+                                  <option v-for="video in listaVideos" v-bind:value="video.idVideo">{{video.nombreVideo}}</option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="col">
+                                <div class="form-group ">
+                                    <label for="">Seleccione el tipo recurso</label>
+                                    <select name="" class="form-control" id="insert-tipo-recurso">
+                                        <option value="0">Seleccione tipo</option>
+                                        <option v-for="recurso in listaTipoRecurso" v-bind:value="recurso.id">{{recurso.nombreTipoRec}}</option>
+                                    </select>
+                                </div> 
+                          </div>
+                       </div>
+                       <div class="row">
+                            <div class="form-group col">
+                              <p>  <i>Suba el recurso a un plataforma como drive u otra si es un archivo y genere el url, pegelo aqui.  </i></p>
+                               <label for="">URL: </label>
+                              <input class="form-control" type="url" name="" id="insert-url-recurso">
+                            </div>
+                       </div>
+               
+                  </form>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn_cancel" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn_confirm" data-dismiss="modal" @click="insertRecurso">Guardar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+           <!-- Modal update recursos -->
+    
+           <div class="modal fade" id="updateModalRecursos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel"> Actualizar  Recurso</h3>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                   <form action="" class="">
+                    <div class="row">
+                      <div class="form-group col ">
+                          <label for="">Nombre</label>
+                          <input class="form-control" type="text" name="" id="update-nombre-recurso">
+                      </div>
+                      
+                   </div>
+                   <div class="row">
+                      <div class="col">
+                        <div class="form-group ">
+                          <label for="">Seleccione el video</label>
+                          <select name="" class="form-control" id="update-video-recurso">
+                              <option value="0">Seleccione video</option>
+                              <option v-for="video in listaVideos" v-bind:value="video.idVideo">{{video.nombreVideo}}</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col">
+                            <div class="form-group ">
+                                <label for="">Seleccione el tipo recurso</label>
+                                <select name="" class="form-control" id="update-tipo-recurso">
+                                    <option value="0">Seleccione tipo</option>
+                                    <option v-for="recurso in listaTipoRecurso" v-bind:value="recurso.id">{{recurso.nombreTipoRec}}</option>
+                                </select>
+                            </div> 
+                      </div>
+                   </div>
+                   <div class="row">
+                    <div class="form-group col">
+                        <p>  <i>Suba el recurso a un plataforma como drive u otra si es un archivo y genere el url, pegelo aqui.  </i></p>
+                        <label for="">URL :</label>
+                        <input class="form-control" type="url" name="" id="update-url-recurso">
+                    </div>
+                   </div>
+           
+
+                  </form>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn_cancel" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn_confirm" data-dismiss="modal" @click="updateRecurso">Actualizar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+         <!-- Modal delete recursos -->
+         <div class="modal fade" id="deleteModalRecurso" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog ">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h3 class="modal-title" id="exampleModalLabel"> Eliminar Recurso</h3>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form action="" class="">
+                 
+                    <div class="row">
+                    <div class="container-alert mt-0">
+                                <div class=" mt-0 mb-0 myalert" role="alert">
+                                    <i class="fas fa-exclamation bg-infoDanger"></i>
+                                </div>
+                        </div>
+                        
+                      <div class="form-group col">
+                          <label for="">Nombre:</label>
+                          <input class="form-control" type="text" name="" id="delete-nombre-recurso" readonly>
+                      </div>
+                      
+                    </div> 
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn_cancel" data-dismiss="modal">Cancelar</button>
+                  <button type="button" class="btn btn_confirm"  data-dismiss="modal" @click="deleteRecurso">Eliminar</button>
+                </div>
+              </div>
+            </div>
+          </div>    

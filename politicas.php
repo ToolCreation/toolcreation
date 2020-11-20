@@ -153,6 +153,7 @@ session_start();
         </footer>
     </div>
      <!--============================================= SRC JS ==================================================-->
+     <script src="https://js.stripe.com/v3/"></script>
      <script src="src/js/axios.min.js"></script>
      <script src="src/js/vue.js"></script>
      <script src="src/js/cliente_plataform.js"></script>

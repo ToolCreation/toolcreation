@@ -218,6 +218,7 @@ const NIVEL_CURSO = new Vue({
                    .then(function (response) {
                        console.log(response);
                    if(response.data == "1"){
+                    sessionStorage.clear();
                        window.location.href = "../public/login.html";
                    }else{
                     NIVEL_CURSO.alertMessage("myalert alert-fail","Hubo un error al  cerrar sesion" + response.data, "fas fa-times bg-fail");

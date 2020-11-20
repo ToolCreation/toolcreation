@@ -31,9 +31,7 @@ session_start();
         <?php require('sections/dropdown.php'); ?>
     
               <button id="btn-menu-principal" class="btn-menu-principal"><i class="fas fa-bars"></i></button> 
-              <div><input type="text" id="idUsuario" style="display: none" value="<?php echo  $_SESSION['status']  ?>" >
-                     <input type="text" id="idCurso-detail" style="display: none" value="<?php echo $idCurso ?>" >
-                </div>
+              <div><input type="text" id="idCurso-detail" style="display: none" value="<?php echo $idCurso ?>" ></div>
         </header>
 
            <?php require 'sections/detail_body.html' ?> 
@@ -46,7 +44,7 @@ session_start();
 
      <script src="src/js/axios.min.js"></script>
      <script src="src/js/vue.js"></script>
-     <script src="https://momentjs.com/downloads/moment-with-locales.min.js"></script>
+    <script src="src/plugins/moment-with-locales.min.js"></script>
      <script src="src/js/detail_curso.js"></script>
      <script src="src/js/menu_principal.js"></script>
      <script src="src/js/dropdown.js"></script>

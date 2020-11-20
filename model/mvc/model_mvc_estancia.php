@@ -74,8 +74,8 @@ class  MVCEstancia {
          
         while( $row=mysqli_fetch_array($select) ){
             $colecciones[] = array(
-               'id' =>  $row['Int_IdEstancia_Inst'],
-               'nombreEstancia'  =>  $row['VchNombreEstancia']
+               'id' =>   utf8_encode($row['Int_IdEstancia_Inst']),
+               'nombreEstancia'  =>   utf8_encode($row['VchNombreEstancia'])
             );
         }
          $encabezado=array("estancia"=>$colecciones);

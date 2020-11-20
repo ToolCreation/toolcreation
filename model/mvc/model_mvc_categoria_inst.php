@@ -2,7 +2,6 @@
 class  MVCCategoriaInstructor  {
     protected $db;
     protected $conn;
-    protected $params;
     private $id;
     private $nombreCategoria;
     private $sql;
@@ -73,8 +72,8 @@ class  MVCCategoriaInstructor  {
          
         while( $row=mysqli_fetch_array($select) ){
             $categoria[] = array(
-               'id' =>  $row['Int_IdCategoria_Inst'],
-               'nombreCategoria'  =>  $row['Vch_CategoriaInst']
+               'id' =>  utf8_encode($row['Int_IdCategoria_Inst']),
+               'nombreCategoria'  =>  utf8_encode($row['Vch_CategoriaInst'])
             );
         }
          $encabezado=array("categoria"=>$categoria);

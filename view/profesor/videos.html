@@ -1,0 +1,223 @@
+<div class="wrap-table100" id="wrap-table">
+                <div class="card">
+                <input class="input-search" type="text" name="" placeholder="Buscar video" id="searchVideos">
+
+                    <div class="card-header">
+                      
+                      <h3 class="table-h3">Tabla de Videos</h3>
+
+                      <button class="btn btn-add " type="submit" data-toggle="modal" data-target="#insertModalVideo" ><i class="fas fa-plus"></i> Agregar</button>
+     
+                    </div>
+                    <div class="card-body ">     
+                      <div class="js-pscroll">
+
+                      <table class="table table-striped table-hover">
+                        <thead>
+                          <tr>
+                            <th>Id</th>
+                            <th>Nombre </th>
+                            <th>Tema</th>  
+                            <th>Tipo </th>
+                            <th>URL</th>
+                          </tr>
+                         
+                        </thead>
+                            <tbody>
+                               <tr v-for="(video, index) in listaVideos" v-show="index >=  anteriorVideo && index < siguienteVideo">
+                                  <td>{{video.idVideo}}</td>
+                                  <td>{{video.nombreVideo}}</td>
+                                  <td>{{video.nombreTema}}</td>
+                                  <td>{{video.tipoVideo}}</td>
+                                  <td><a v-bind:href="video.URLvideo">{{video.URLvideo}}</a></td>
+                                  <td>
+                                    <button  type="button"  class="btn btn-success "  data-toggle="modal" data-target="#updateModalVideo" @click= "setDatosVideo(video)" ><i class="far fa-edit"></i> Editar</button>
+                                    <button type="button"  class="btn btn-delete " data-toggle="modal" data-target="#deleteModalVideo" @click= "setDatosDeleteVideo(video)"><i class="fas fa-trash-alt"></i>Eliminar</button>
+                                  </td>
+                                </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    </div>
+                    <nav aria-label="..." style="padding: 10px">
+                     <ul class="pagination">
+                        <li v-bind:class="ocultarMostrarAnteriorVideo">
+                          <a class="page-link" href="#" tabindex="-1" aria-disabled="true" @click="prevVideo">Anterior</a>
+                        </li>
+                        <li v-for="paginaVideo in paginasVideos" class="page-item">
+                          <a class="page-link" @click ="paginarVideos(paginaVideo)" href="#">{{paginaVideo}}</a>
+                        </li>
+                        <li v-bind:class="ocultarMostrarSiguienteVideo">
+                          <a class="page-link" href="#" @click="nextVideo">Siguiente</a>
+                        </li>
+                      </ul>
+                   </nav>
+                </div>
+            </div>
+               
+    
+
+        <!-- Modal insertar Video-->
+        <div class="modal fade" id="insertModalVideo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel"> Agregar Video</h3>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                   <form action="" class="">
+                       <div class="row">
+                          <div class="form-group col ">
+                              <label for="">Nombre</label>
+                              <input class="form-control" type="text" name="" id="insert-nombre-video">
+                          </div>
+                       </div>
+                       <div class="row">
+                          <div class="col">
+                            <div class="form-group ">
+                              <label for="">Seleccione el tema</label>
+                              <select name="" class="form-control" id="insert-tema-video">
+                                  <option value="0">Seleccione Tema</option>
+                                  <option v-for="tema in listaTemas" v-bind:value="tema.id">{{tema.nombre}}</option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="col">
+                                <div class="form-group ">
+                                    <label for="">Seleccione el tipo video</label>
+                                    <select name="" class="form-control" id="insert-res-video">
+                                        <option value="0">Seleccione tipo</option>
+                                        <option  v-for="tipoVideo in listaTipoVideo" v-bind:value="tipoVideo.id">{{tipoVideo.nombreTipoVideo}}</option>
+                                    </select>
+                                </div> 
+                          </div>
+                       </div>
+                       <div class="row">
+                            <div class="form-group col">
+                              <p>  <i>Para subir el video, necesita que este tenga una buena calidad de imagen y video,
+                                usted puede editarlos con las herramientas que usted guste. incluso si ustede ya tienes un curso en Youtube u otras plataformas,
+                                puede pegar los urls, solo valla a su plataforma y genere el link del video</i></p>
+                              <!-- <label for="">Seleccione el video</label>
+                              <input class="form-control" type="file" name="" id="insert-video"> -->
+                            </div>
+                            
+                       </div>
+                       <div class="row">
+                        <div class="form-group col">
+                          <label for="">Pege el url</label>
+                          <input class="form-control" type="url" name="" id="insert-url">
+                        </div>
+                       </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn_cancel" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn_confirm" data-dismiss="modal" @click="insertVideo">Guardar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+           <!-- Modal update Videos -->
+    
+           <div class="modal fade" id="updateModalVideo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel"> Actualizar  video</h3>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                   <form action="" class="">
+                       <div class="row">
+                          <div class="form-group col ">
+                              <label for="">Nombre</label>
+                              <input class="form-control" type="text" name="" id="update-nombre-video">
+                          </div>
+                       </div>
+                       <div class="row">
+                          <div class="col">
+                            <div class="form-group ">
+                              <label for="">Seleccione el tema</label>
+                              <select name="" class="form-control" id="update-tema-video">
+                                  <option value="0">Seleccione Tema</option>
+                                  <option v-for="tema in listaTemas" v-bind:value="tema.id">{{tema.nombre}}</option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="col">
+                                <div class="form-group ">
+                                    <label for="">Seleccione el tipo video</label>
+                                    <select name="" class="form-control" id="update-res-video">
+                                        <option value="0">Seleccione tipo</option>
+                                        <option  v-for="tipoVideo in listaTipoVideo" v-bind:value="tipoVideo.id">{{tipoVideo.nombreTipoVideo}}</option>
+                                    </select>
+                                </div> 
+                          </div>
+                       </div>
+                       <div class="row">
+                        <div class="form-group col">
+                          <p>  <i>Para subir el video, necesita que este tenga una buena calidad de imagen y video,
+                              usted puede editarlos con las herramientas que usted guste. incluso si ustede ya tienes un curso en Youtube u otras plataformas,
+                              puede pegar los urls, solo valla a su plataforma y genere el link del video</i></p>
+                          <!-- <label for="">Seleccione el video</label>
+                          <input class="form-control" type="file" name="" id="update-video"> -->
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="form-group col">
+                          <label for="">Pege el url</label>
+                          <input class="form-control" type="url" name="" id="update-url">
+                        </div>
+                      </div>
+
+                  </form>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn_cancel" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn_confirm" data-dismiss="modal" @click="updateVideo">Actualizar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+         <!-- Modal delete video -->
+         <div class="modal fade" id="deleteModalVideo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog ">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h3 class="modal-title" id="exampleModalLabel"> Eliminar video</h3>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form action="" class="">
+                 
+                    <div class="row">
+                    <div class="container-alert mt-0">
+                                <div class=" mt-0 mb-0 myalert" role="alert">
+                                    <i class="fas fa-exclamation bg-infoDanger"></i>
+                                </div>
+                        </div>
+                      <div class="form-group col">
+                          <label for="">Nombre:</label>
+                          <input class="form-control" type="text" name="" id="delete-nombre-video" readonly>
+                      </div>
+                      
+                    </div> 
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn_cancel" data-dismiss="modal">Cancelar</button>
+                  <button type="button" class="btn btn_confirm"  data-dismiss="modal" @click="deleteVideo">Eliminar</button>
+                </div>
+              </div>
+            </div>
+          </div>    

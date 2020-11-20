@@ -104,7 +104,7 @@ class MVCCurso {
            $this->sql = "CALL sp_curso_update_image('$this->nombre', '$this->conocimiento', '$this->descripcion',
                                                     '$this->requistos','$this->categoria', '$this->nivel', '$this->precio',
                                                      '$this->moneda' ,'$fechaHoy', '$this->imagenCurso' ,'$this->idCurso' )";
-           $insert = $this->conn->query($this->sql);
+           $update = $this->conn->query($this->sql);
            if($update){
               $ruta = "../src/img/bannerscursos/".$this->imagenCurso;
                move_uploaded_file($this->rutaActualImagen,$ruta);
@@ -172,24 +172,53 @@ class MVCCurso {
         $cursoList = array();
         while( $row = mysqli_fetch_array($search) ){
             $cursoList[] = array(
-               'id' =>  $row['Int_IdCurso'],
-               'idInstructor' => $row['FK_Instructor'],
-               'nombre'  =>  $row['Vch_Nobre_Curso'],
-               'incritos' => $row['CantidadDeRegistrados'],
-               'conocimiento' => $row['Vch_Conocimiento_Curso'],
-               'descripcion' => $row['VchDescripcion_Curso'],
-               'requisitos' => $row['VchRequisitos_Curso'],
-               'categoria' => $row['Vch_CategoriaInst'],
-               'nivel' => $row['Vch_Nombre_Nivel'],
-               'precio' => $row['Fl_Precio_Curso'],
-               'moneda' => $row['VchNombre_Moneda'],
-               'imgCurso' => $row['vchImagenCurso'],
-               'dateModificacion' => $row['DT_UltimaFecha_modificacion'],
-               'instructor' => $row['nombreInstructor'],
-               'imgUser' => $row['imgUser']
+               'id' =>   utf8_encode($row['Int_IdCurso']),
+               'idInstructor' =>  utf8_encode($row['FK_Instructor']),
+               'nombre'  =>   utf8_encode($row['Vch_Nobre_Curso']),
+               'incritos' =>  utf8_encode($row['CantidadDeRegistrados']),
+               'conocimiento' =>  utf8_encode($row['Vch_Conocimiento_Curso']),
+               'descripcion' =>  utf8_encode($row['VchDescripcion_Curso']),
+               'requisitos' =>  utf8_encode($row['VchRequisitos_Curso']),
+               'categoria' =>  utf8_encode($row['Vch_CategoriaInst']),
+               'nivel' =>  utf8_encode($row['Vch_Nombre_Nivel']),
+               'precio' =>  utf8_encode($row['Fl_Precio_Curso']),
+               'moneda' =>  utf8_encode($row['VchNombre_Moneda']),
+               'imgCurso' =>  utf8_encode($row['vchImagenCurso']),
+               'dateModificacion' =>  utf8_encode($row['DT_UltimaFecha_modificacion']),
+               'instructor' =>  utf8_encode($row['nombreInstructor']),
+               'imgUser' => utf8_encode( $row['imgUser'])
             );
         }
         $encabezado=array("cursoList"=>$cursoList);
+        $json_string = json_encode($encabezado,JSON_UNESCAPED_UNICODE);
+        $this->closeConnection();
+        return $json_string;
+     }
+
+     public function filterCurseForCategory(){
+        $this->sql = "CALL sp_curso_read_category('$this->categoria')";
+        $search = $this->conn->query($this->sql);
+        $cursoListFilter = array();
+        while( $row = mysqli_fetch_array($search) ){
+            $cursoListFilter[] = array(
+               'id' =>   utf8_encode($row['Int_IdCurso']),
+               'idInstructor' =>  utf8_encode($row['FK_Instructor']),
+               'nombre'  =>   utf8_encode($row['Vch_Nobre_Curso']),
+               'incritos' =>  utf8_encode($row['CantidadDeRegistrados']),
+               'conocimiento' =>  utf8_encode($row['Vch_Conocimiento_Curso']),
+               'descripcion' =>  utf8_encode($row['VchDescripcion_Curso']),
+               'requisitos' =>  utf8_encode($row['VchRequisitos_Curso']),
+               'categoria' =>  utf8_encode($row['Vch_CategoriaInst']),
+               'nivel' =>  utf8_encode($row['Vch_Nombre_Nivel']),
+               'precio' =>  utf8_encode($row['Fl_Precio_Curso']),
+               'moneda' =>  utf8_encode($row['VchNombre_Moneda']),
+               'imgCurso' =>  utf8_encode($row['vchImagenCurso']),
+               'dateModificacion' =>  utf8_encode($row['DT_UltimaFecha_modificacion']),
+               'instructor' =>  utf8_encode($row['nombreInstructor']),
+               'imgUser' => utf8_encode( $row['imgUser'])
+            );
+        }
+        $encabezado=array("cursoList"=>$cursoListFilter);
         $json_string = json_encode($encabezado,JSON_UNESCAPED_UNICODE);
         $this->closeConnection();
         return $json_string;
@@ -201,20 +230,20 @@ class MVCCurso {
         $cursoDetalle = array();
         while( $row=mysqli_fetch_array($search) ){
             $cursoDetalle[] = array(
-               'id' =>  $row['Int_IdCurso'],
-               'idInstructor' => $row['FK_Instructor'],
-               'nombre'  =>  $row['Vch_Nobre_Curso'],
-               'conocimiento' => $row['Vch_Conocimiento_Curso'],
-               'descripcion' => $row['VchDescripcion_Curso'],
-               'requisitos' => $row['VchRequisitos_Curso'],
-               'categoria' => $row['Vch_categoriaInst'],
-               'nivel' => $row['Vch_Nombre_Nivel'],
-               'precio' => $row['Fl_Precio_Curso'],
-               'moneda' => $row['VchNombre_Moneda'],
-               'imgCurso' => $row['vchImagenCurso'],
-               'dateModificacion' => $row['DT_UltimaFecha_modificacion'],
-               'instructor' => $row['nombreInstructor'],
-               'imgUser' => $row['imgUser']
+               'id' =>   utf8_encode($row['Int_IdCurso']),
+               'idInstructor' => utf8_encode($row['FK_Instructor']),
+               'nombre'  =>   utf8_encode($row['Vch_Nobre_Curso']),
+               'conocimiento' =>  utf8_encode($row['Vch_Conocimiento_Curso']),
+               'descripcion' =>  utf8_encode($row['VchDescripcion_Curso']),
+               'requisitos' =>  utf8_encode($row['VchRequisitos_Curso']),
+               'categoria' =>  utf8_encode($row['Vch_categoriaInst']),
+               'nivel' =>  utf8_encode($row['Vch_Nombre_Nivel']),
+               'precio' =>  utf8_encode($row['Fl_Precio_Curso']),
+               'moneda' =>  utf8_encode($row['VchNombre_Moneda']),
+               'imgCurso' =>  utf8_encode($row['vchImagenCurso']),
+               'dateModificacion' =>  utf8_encode($row['DT_UltimaFecha_modificacion']),
+               'instructor' =>  utf8_encode($row['nombreInstructor']),
+               'imgUser' =>  utf8_encode($row['imgUser'])
             );
         }
         $encabezado=array("cursoDetail"=>$cursoDetalle);

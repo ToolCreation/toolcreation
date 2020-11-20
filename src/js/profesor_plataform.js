@@ -1,6 +1,7 @@
-const ENDPOINT_LOG_PROFESOR ="../../controller/controller_login.php";
+const ENDPOINT_LOG_PROFESOR ="../../controller/controller_instructor.php";
 const ENDPOINT_LOG_ALUMNO   = "../../controller/controller_login.php";
 const ENPOINT_GENERADOR_COMBOS =  "../../controller/controller_data_combos.php";
+
 
 
 var d = document;
@@ -52,25 +53,24 @@ const CLOSE = new Vue({
            
         },
         comprobarLogeoProfesor: function(){
-            let idUserProfesor =  d.getElementById('idUserProfesor').value;
-             if(idUserProfesor >0){
-                 this.profesorLog = true;
-             }
+          let statusSesionUser =  sessionStorage.getItem('status');
+          if(statusSesionUser == 'activo'){
+              this.profesorLog = true;
+          }
         },
         setValoresInstructor: function(){
-            let grado = document.getElementById('idValueGrado').value;
-            let est = document.getElementById('idValueEstancia').value;
-            console.log(grado+" - "+est);
-            document.getElementById("idConocimiento").value =  parseInt( document.getElementById('idValueEstancia').value);
-            document.getElementById("idEstancia").value =  parseInt(document.getElementById('idValueGrado').value);
+            let grado = sessionStorage.getItem('gradoConocimiento');
+            let estancia = sessionStorage.getItem('estancia')
+            // console.log('te voy a mostrar los valores de grado y estancia')
+            console.log(`Grado: ${ parseInt(grado)} - Estancia ${ parseInt(estancia)}`);
+            document.getElementById("comboConocimiento").selectedIndex = parseInt(grado);
+            document.getElementById("comboEstancia").selectedIndex =  parseInt(estancia);
         },
         setValoresAcount: function(){
-            //Extraccion de valores
-           
-            let fechaNacimiento = d.getElementById('fechaNacimiento').value;
-            let imgUser = d.getElementById('imagenUsuario').value;
-            let sexoUser = d.getElementById('sexoUser').value;
-            let tefofonoUser = d.getElementById('telefonoUser').value;
+            let fechaNacimiento = sessionStorage.getItem('fNacimineto');
+            let imgUser = sessionStorage.getItem('imagen')
+            let sexoUser = sessionStorage.getItem('sexo')
+            let tefofonoUser = sessionStorage.getItem('telefono');
             let splitFecha = fechaNacimiento.split('-');
             document.getElementById('year').value = splitFecha[0];
             document.getElementById('month').value = splitFecha[1];
@@ -90,7 +90,7 @@ const CLOSE = new Vue({
             (imgUser === "")  ? this.imgAccount = '../../src/img/noImagen.svg' :   this.imgAccount = '../../src/img/perfilUsers/'+imgUser;
               
             //colocacion de telefono
-            (tefofonoUser === "") ? document.getElementById('telefono').value = "" : document.getElementById('telefono').value = tefofonoUser;
+            (tefofonoUser === "" || tefofonoUser === "null") ? document.getElementById('telefono').value = "" : document.getElementById('telefono').value = tefofonoUser;
             
         },
         updateInfoPersonal: function (){
@@ -109,7 +109,7 @@ const CLOSE = new Vue({
                 dateOfBirth: this.yearAccount+'-'+this.monthAccount+'-'+this.dayAccount,
                 sexo: selectedGenero,
                 telefono: d.getElementById('telefono').value,
-                idUser: d.getElementById('idUser').value
+                idUser: sessionStorage.getItem('usuario')
             }
             if(CLOSE.camposVaciosConfigPersonal(datos)){
                 CLOSE.alertMessage("myalert alert-infoDanger","Existen campos vacios, intente de nuevo","fas fa-exclamation bg-infoDanger");
@@ -121,6 +121,7 @@ const CLOSE = new Vue({
                 if (response.data) {
                   console.log(response.data);
                   CLOSE.alertMessage("myalert alert-correct","Se han actualizado su perfil","fas fa-check bg-correct");
+                  sessionStorage.setItem('imagen', img.name)
                   setTimeout(function () {
                         location.reload();
                     }, 2800);
@@ -139,7 +140,7 @@ const CLOSE = new Vue({
                   email: d.getElementById('insert-email').value,
                   user: d.getElementById('insert-usuario').value,
                   pass: d.getElementById('insert-newPass').value,
-                  idUser: d.getElementById('idUser').value
+                  idUser: sessionStorage.getItem('usuario')
                 }
             console.log(datos.pass);
             if(CLOSE.camposVaciosConfigAccount(datos)){
@@ -167,16 +168,17 @@ const CLOSE = new Vue({
           },
           updateInfoAccountProfesor: function(){
             let datos = {
-                id: d.getElementById('idUserProfesor').value,
-                conocimiento: d.getElementById('idConocimiento').value,
-                estancia: d.getElementById('idEstancia').value,
+                id: sessionStorage.getItem('idProfesor'),
+                conocimiento: d.getElementById('comboConocimiento').value,
+                estancia: d.getElementById('comboEstancia').value,
               }
+              console.log(datos);
               if(datos.id == 0 || datos.conocimiento == 0 || datos.estancia == 0){
                 CLOSE.alertMessage("myalert alert-infoDanger","Existen campos vacios, intente de nuevo","fas fa-exclamation bg-infoDanger");
         
               }else{
-                 let formdata = CLOSE.toFormData(datos,'accountConfigLog')
-                 axios.post(ENDPOINT_LOG_ALUMNO, formdata).then(function (response) {
+                 let formdata = CLOSE.toFormData(datos,'update')
+                 axios.post(ENDPOINT_LOG_PROFESOR, formdata).then(function (response) {
                     console.log(response);
                     if (response.data) {
                       console.log(response.data);
@@ -225,10 +227,11 @@ const CLOSE = new Vue({
         closeSesionRol: () => {
             let formdata = new FormData();
                         formdata.append('option','destroySesion');
-                            axios.post(ENDPOINT_LOG_PROFESOR, formdata)
+                            axios.post(ENDPOINT_LOG_ALUMNO, formdata)
                                 .then(function (response) {
                                     console.log(response);
                                 if(response.data == "1"){
+                                    sessionStorage.clear();
                                     window.location.href = "../../public/login.html";
                                 }else{
                                     CLOSE.alertMessage("myalert alert-fail","Hubo un error al  cerrar sesion" + response.data, "fas fa-times bg-fail");

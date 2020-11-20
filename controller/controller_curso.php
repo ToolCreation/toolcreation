@@ -54,6 +54,10 @@ switch($option){
     case 'showDataCursos':
         echo $curso->showDataCursoClient();
     break;
+    case 'showFilterCurseCatefory':
+        $curso->setCategoria($_POST['idCategory']);
+        echo $curso->filterCurseForCategory();
+    break;
     case 'showDataCursosDetail':
         $curso->setId($_POST['IDCURSO']);
         echo $curso->cursoDeatail();

@@ -10,8 +10,7 @@ class  MVCPlataforma {
     private $misionPlataforma;
     private $visionPlataforma;
     private $descripcionEmpresa;
-    protected $params;
-    private $sql;
+    protected $sql;
 
     //metodo set para los valores 
     public function setData($nombrePlataforma, $objetivosPlataforma, $metasPlataforma, $misionPlataforma, $visionPlataforma, $descripcionEmpresa){
@@ -89,13 +88,13 @@ class  MVCPlataforma {
          
         while( $row=mysqli_fetch_array($select) ){
             $plataforma[] = array(
-               'id' =>  $row['Int_Id_Plataforma'],
-               'nombrePlataforma'  =>  $row['Vch_NombrePlataforma'],
-               'objetivosPlataforma' =>  $row['Vch_Objetivos_Plataforma'],
-               'metasPlataforma' =>$row['Vch_Metas_Plataforma'],
-               'misionPlataforma' => $row['Vch_Mision_Plataforma'],
-               'visionPlataforma' =>  $row['Vch_Vision_Plataforma'],
-               'descripcionEmpresa' => $row['Vch_Descripcion_Empresa']
+               'id' =>   utf8_encode($row['Int_Id_Plataforma']),
+               'nombrePlataforma'  =>   utf8_encode($row['Vch_NombrePlataforma']),
+               'objetivosPlataforma' =>   utf8_encode($row['Vch_Objetivos_Plataforma']),
+               'metasPlataforma' => utf8_encode($row['Vch_Metas_Plataforma']),
+               'misionPlataforma' =>  utf8_encode($row['Vch_Mision_Plataforma']),
+               'visionPlataforma' =>  utf8_encode( $row['Vch_Vision_Plataforma']),
+               'descripcionEmpresa' =>  utf8_encode($row['Vch_Descripcion_Empresa'])
             );
         }
          $encabezado=array("plataforma"=>$plataforma);

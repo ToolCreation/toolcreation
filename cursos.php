@@ -13,7 +13,7 @@ session_start();
     <link rel="stylesheet" href="src/icons/all.css">
 </head>
 <body>
-    <div class="content-principal">
+    <div class="content-principal" >
         <header class="header-principal">
             <div class="content-logo-principal">      
                 <a href="index.php"><img src="src/img/Logo-ToolCreatiion2.png" width="110" height="70" alt=""></a> 
@@ -36,7 +36,7 @@ session_start();
                     <h3>Busqueda de cursos</h3>
                   </div>
                   <div class="width-100">
-                    <input type="text" class="input-text input-100" placeholder="Busque por nombre de curso">
+                    <input type="text" class="input-text input-100" @keyup="inputSearchNameCurso" id="searchCurseName" placeholder="Busque por nombre de curso">
                   </div>
 
                   <!-- <div class="width-100" >
@@ -44,18 +44,24 @@ session_start();
                         <option value="0">Seleccione una categoria</option>
                      </select>
                   </div> -->
+                  <button type="button" class="button-tecnology" @click="loadCursos">Todos</button>
                 
-                  <button type="button" class="button-tecnology">Web</button>
-                  <button type="button" class="button-tecnology">Movil </button>
+                  <button v-for="categoria in categorias " type="button" class="button-tecnology" @click="resultCursosForCategory(categoria)">{{categoria.nombreCategoria}}</button>
+                  
 
                 <button class="button-search-curso">Buscar</button>
             </div>
             
             <div class="section-result-cursos">
                 <h2>Cursos</h2>
+                     <div class="container-alert">
+                        <div v-bind:class="alertgeneral" role="alert">
+                                <p>{{messagealert}}</p>
+                                <i v-bind:class="alerticon"></i>
+                        </div>
+                    </div>
                 <div class="content-card-result">
-
-                    <div   v-for="curso in cursosRecent " class="card-curso-result">
+                    <div   v-for="curso in cursosRecent " class=" card-curso-result" >
                         <div class="header-curso-result">
                             <img v-bind:src="'src/img/bannerscursos/'+ curso.imgCurso" alt="">
                         </div>
@@ -65,7 +71,6 @@ session_start();
                             <button type="button" class="btn show-curso" @click="irdetallecurso(curso.id)">Ir a ver</button>
                         </div> 
                     </div> 
-                   
                 </div>
                 
 
@@ -76,10 +81,10 @@ session_start();
             require('./sections/footer.php')
         ?>
     </div>
-   
+    <script src="https://js.stripe.com/v3/"></script>
      <script src="src/js/axios.min.js"></script>
      <script src="src/js/vue.js"></script>
-     <script src="https://momentjs.com/downloads/moment-with-locales.min.js"></script>
+     <!--<script src="src/plugins/moment-with-locales.min.js"></script> -->
      <script src="src/js/cliente_plataform.js"></script>
      <script src="src/js/menu_principal.js"></script>
      <script src="src/js/dropdown.js"></script>

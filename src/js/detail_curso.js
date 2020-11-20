@@ -1,5 +1,6 @@
 const ENDPOINT_LOG_ALUMNO   = "controller/controller_login.php";
 const ENDPOINT_CURSOS = "controller/controller_data_combos.php";
+const ENDPOINT_VENTAS = "controller/controller_ventas.php";
 var d = document;
 
 //CLIENTE.alertMessage("myalert alert-infoDanger","Archivo no valido","fas fa-exclamation bg-infoDanger");
@@ -17,22 +18,24 @@ const CLIENTE = new Vue({
     curdoDetailList: [],
     temasList: [],
     title: "Hola",
+    statusVentaCurso :''
   },
   mounted: function() {
     this.comprobarLogeo();
     this.cargarCursoDetail();
+    this.loadStatusVentaCurso()
     this.loadTemas();
-    // this.loadData();
+
  },
   methods: {
     getDateHuman:function (dateAPI){
       return moment(dateAPI, "YYYYMMDD").fromNow();
     },
     comprobarLogeo: function(){
-        let idUser =  d.getElementById('idUsuario').value;
-         if(idUser == 'activo'){
-             this.logeado = true;
-         }
+      let statusSesionUser =  sessionStorage.getItem('status');
+      if(statusSesionUser == 'activo'){
+          this.logeado = true;
+      }
     },
     cargarCursoDetail: function(){
         d.getElementById("idCurso-detail").value;
@@ -58,6 +61,17 @@ const CLIENTE = new Vue({
     loadData: function(){
        console.log(this.curdoDetailList);
     },
+    loadStatusVentaCurso: function(){
+      d.getElementById("idCurso-detail").value;
+      let getData = new FormData();
+      getData.append('option','statuPayCurso')
+      getData.append('curso',d.getElementById("idCurso-detail").value);
+      getData.append('estudiante', sessionStorage.getItem('estudiante'));
+      axios.post(ENDPOINT_VENTAS, getData).then(function (response) {
+        console.log(response);
+        CLIENTE.statusVentaCurso = response.data;
+      }) 
+    },
     
     closeSesionRol: () => {
       let formdata = new FormData();
@@ -66,6 +80,7 @@ const CLIENTE = new Vue({
       axios.post(ENDPOINT_LOG_ALUMNO, formdata).then(function (response) {
         console.log(response);
         if (response.data == "1") {
+          sessionStorage.clear();
           window.location.href = "index.php";
         } else {
             CLIENTE.alertMessage(
@@ -77,10 +92,10 @@ const CLIENTE = new Vue({
       });
     },
  
-  irdetallecurso: function(id){
-    let valor = 'idcurso='+id; 
-    window.location.href = 'detailcurso.php?'+valor;
-  },
+  // irdetallecurso: function(id){
+  //   let valor = 'idcurso='+id; 
+  //   window.location.href = 'detailcurso.php?'+valor;
+  // },
   limpiarAlertas: function (){
     CLIENTE.alertgeneral = null;
     CLIENTE.messagealert = null; 
@@ -93,10 +108,19 @@ const CLIENTE = new Vue({
     CLIENTE.messagealert = message;
     CLIENTE.alerticon = iconName;
         },
-  gotoPay: function(){
-    console.log("ire a pagar")
-    window.location.href = 'comprar.php';
+  gotoPay: function(curso){
+    localStorage.setItem('idCursoPay', curso.id);
+    localStorage.setItem('moneda',curso.moneda)
+    localStorage.setItem('precio',curso.precio)
+    localStorage.setItem('nameCurso', curso.nombre);
+    localStorage.setItem('imgCurso', curso.imgCurso)
+
+    window.location.href = `comprar.php`;
+
   },
+  gotoMyCurse: function(){
+    window.location.href = `miscursos.php`;
+  }
   },
   
   

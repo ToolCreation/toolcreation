@@ -85,9 +85,9 @@ class  MVCEstadoUsuario {
          
         while( $row=mysqli_fetch_array($select) ){
             $colecciones[] = array(
-               'id' =>  $row['Int_Estado_U'],
-               'nombreEstado'  =>  $row['Vch_Nombre_Estado_U'],
-               'descripcion'  =>  $row['Vch_Descripcion']
+               'id' =>   utf8_encode($row['Int_Estado_U']),
+               'nombreEstado'  =>   utf8_encode($row['Vch_Nombre_Estado_U']),
+               'descripcion'  =>   utf8_encode($row['Vch_Descripcion'])
 
             );
         }

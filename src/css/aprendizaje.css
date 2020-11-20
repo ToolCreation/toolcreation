@@ -1,0 +1,160 @@
+.container-nav-learn{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.container-progres-bar{
+    height: 5px;
+    width: 100%;
+    background: rgb(213, 249, 255);
+    margin-right: 10px;
+    border-radius: 20px;
+}
+
+.progres-bar{
+    width: 10%;
+    height: 5px;
+    background-color: #ff9368;
+    border-radius: 20px;
+}
+.item-nav-2{
+    text-align: center;
+    width: 28%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.item-nav-2 .fas{
+
+    color: rgb(155, 155, 155);
+}
+/*=============================[Estilos para el sidebar]==============================*/
+
+nav {
+    background-color: #fff ;
+    height: 100%;
+    position: fixed;
+    right: -300px;
+    top: 20;
+    -moz-transition: right 0.2s linear;
+    -o-transition: right 0.2s linear;
+    -webkit-transition: right 0.2s linear;
+    transition: right 0.2s linear;
+    width: 300px;
+    z-index: 9000;
+    /* IT'S OVER 9000! */
+    -webkit-box-shadow: 0px 4px 35px 0px rgba(0,0,0,0.13);
+    -moz-box-shadow: 0px 4px 35px 0px rgba(0,0,0,0.13);
+    box-shadow: 0px 4px 35px 0px rgba(0,0,0,0.13);
+  }
+  nav #menuToggle {
+    font-family: 'Poppins';
+    background: #1d3557;
+    display: block;
+    position: relative;
+    height: 50px;
+    left: -50px;
+    top: 0px;
+    width: 50px;
+    border: none;
+    overflow: hidden;
+    color: white; transition: all .3s ease;
+  }
+  nav #menuToggle .fas {
+      color: white;
+      margin-top: 18px;
+      margin-right: 5px;
+      margin-bottom: 20px;
+  }
+  nav #menuToggle:hover{
+      width:180px;
+      overflow: none;
+      left: -180px;
+  }
+  nav #menuToggle span {
+    background: white;
+    display: block;
+    height: 10%;
+    left: 10%;
+    position: absolute;
+    top: 45%;
+    width: 80%;
+  }
+  .header-sidebar{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #fff;
+      -webkit-box-shadow: 0px 4px 35px 0px rgba(0,0,0,0.13);
+    -moz-box-shadow: 0px 4px 35px 0px rgba(0,0,0,0.13);
+    box-shadow: 0px 4px 35px 0px rgba(0,0,0,0.13);
+      padding: .5rem;
+  }
+  .header-sidebar .close-sidebar{
+     width: 50px;
+     height: 50px;
+     border:none;
+     border-radius: 100%;
+     padding: .2rem;
+     
+  }
+  .section-temas{
+      padding: 10px;
+
+  }
+  .section-temas a{
+      color: black;
+      display: block;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      text-decoration: none;
+      background: #dadada;
+      padding: 10px 15px;
+      border-radius: 8px;
+  }
+  /* nav #menuToggle span:before, nav #menuToggle span:after {
+    background: white;
+    content: "";
+    display: block;
+    height: 100%;
+    position: absolute;
+    top: -250%;
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+    width: 100%;
+  }
+  nav #menuToggle span:after {
+    top: 250%;
+  }
+   */
+  /* nav a:nth-child(n + 2) {
+    color: white;
+    display: block;
+    font-size: 2.5em;
+    margin: 30px 0 30px 30px;
+  }
+  nav a:nth-child(n + 2):after {
+    background: #ffa53e;
+    content: "";
+    display: block;
+    height: 2px;
+    -moz-transition: width 0.2s;
+    -o-transition: width 0.2s;
+    -webkit-transition: width 0.2s;
+    transition: width 0.2s;
+    width: 0;
+  }
+  nav a:nth-child(n + 2):hover:after {
+    width: 100%;
+  } */
+
+  .open {
+    right: 0;
+  }
+ 

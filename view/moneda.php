@@ -31,7 +31,13 @@ session_start();
             <h2 class="title">Modulo de {{titleModule}}</h2>
 
             <!-- Contenedor de las alertas -->
-          
+            <div class="container-alert">
+                  <div v-bind:class="alertgeneral" role="alert">
+                          <p>{{messagealert}}</p>
+                          <i v-bind:class="alerticon"></i>
+                  </div>
+
+            </div>
 
             <!-- Contenedor general de la tabla y los botones y la paginacion -->
             <div class="wrap-table100" id="wrap-table">

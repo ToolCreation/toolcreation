@@ -48,7 +48,27 @@ switch ($option) {
                     $_SESSION['idRol']         = $arrayListDataUser[14];
                     $_SESSION['imagen']        = $arrayListDataUser[15];
                     $_SESSION['nombreRol']     = $arrayListDataUser[16];
-                    echo $arrayListDataUser[14];
+                    $datosAdminLog = array("idUsuario" =>$arrayListDataUser[0],
+                                            "idEstudiante" =>$arrayListDataUser[1],
+                                            "nombre"       =>$arrayListDataUser[2], 
+                                            "apellidoPaterno" =>$arrayListDataUser[3], 
+                                            "apellidoMaterno" =>$arrayListDataUser[4], 
+                                            "fechNacimineto" =>$arrayListDataUser[5], 
+                                            "edad" =>$arrayListDataUser[6], 
+                                            "sexo" =>$arrayListDataUser[7], 
+                                            "email" =>$arrayListDataUser[8], 
+                                            "telefono" =>$arrayListDataUser[9], 
+                                            "usuario" =>$arrayListDataUser[10],
+                                            "password" =>$arrayListDataUser[11],
+                                            "estadoUser" =>$arrayListDataUser[12],
+                                            "idPlataforma" =>$arrayListDataUser[13],
+                                            "idRol" =>$arrayListDataUser[14],
+                                            "imagen" =>$arrayListDataUser[15],
+                                            "nombreRol" =>$arrayListDataUser[16],
+                                            "ingreso" =>$_SESSION['ingreso'],
+                                            "status" => $_SESSION['status'],
+                                         );
+                    echo json_encode($datosAdminLog);
                     
                 }else{
                 
@@ -68,7 +88,26 @@ switch ($option) {
                     $_SESSION['idRol']         = $arrayListDataUser[13];
                     $_SESSION['imagen']        = $arrayListDataUser[14];
                     $_SESSION['nombreRol']     = $arrayListDataUser[15];
-                    echo $arrayListDataUser[13];
+                    $datosAdminLog = array("idUsuario"        =>$arrayListDataUser[0],
+                                            "nombre"          =>$arrayListDataUser[1], 
+                                            "apellidoPaterno" =>$arrayListDataUser[2], 
+                                            "apellidoMaterno" =>$arrayListDataUser[3], 
+                                            "fechNacimineto"  =>$arrayListDataUser[4], 
+                                            "edad"            =>$arrayListDataUser[5], 
+                                            "sexo"            =>$arrayListDataUser[6], 
+                                            "email"           =>$arrayListDataUser[7], 
+                                            "telefono"        =>$arrayListDataUser[8], 
+                                            "usuario"         =>$arrayListDataUser[9],
+                                            "password"        =>$arrayListDataUser[10],
+                                            "estadoUser"      =>$arrayListDataUser[11],
+                                            "idPlataforma"    =>$arrayListDataUser[12],
+                                            "idRol"           =>$arrayListDataUser[13],
+                                            "imagen"          =>$arrayListDataUser[14],
+                                            "nombreRol"       =>$arrayListDataUser[15],
+                                            "ingreso"         =>$_SESSION['ingreso'],
+                                            "status"          => $_SESSION['status'],
+                                         );
+                    echo json_encode($datosAdminLog);
                     
                 }
                

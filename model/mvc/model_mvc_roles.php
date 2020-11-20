@@ -75,8 +75,8 @@ class  MVCRoles  {
          
         while( $row=mysqli_fetch_array($select) ){
             $rol[] = array(
-               'id' =>  $row['IdIntRol'],
-               'nombreRol'  =>  $row['vchNombre']
+               'id' =>  utf8_encode( $row['IdIntRol']),
+               'nombreRol'  =>   utf8_encode($row['vchNombre'])
             );
         }
          $encabezado=array("rol"=>$rol);

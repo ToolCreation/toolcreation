@@ -74,8 +74,8 @@ class  MVCTipoVideo {
          
         while( $row=mysqli_fetch_array($select) ){
             $colecciones[] = array(
-               'id' =>  $row['Int_Id_TipoVideo'],
-               'nombreTipoVideo'  =>  $row['Vch_Nombre_Video']
+               'id' =>   utf8_encode($row['Int_Id_TipoVideo']),
+               'nombreTipoVideo'  =>   utf8_encode($row['Vch_Nombre_Video'])
             );
         }
          $encabezado=array("tipoVideo"=>$colecciones);

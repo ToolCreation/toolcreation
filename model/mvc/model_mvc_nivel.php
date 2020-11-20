@@ -69,8 +69,8 @@ class MVCNivel{
         $colecciones = array();
         while( $row=mysqli_fetch_array($select) ){
             $colecciones[] = array(
-               'id' =>  $row['Int_IdNivel_Curso'],
-               'nombreNivel'  =>  $row['Vch_Nombre_Nivel']
+               'id' =>   utf8_encode($row['Int_IdNivel_Curso']),
+               'nombreNivel'  =>   utf8_encode($row['Vch_Nombre_Nivel'])
             );
         }
          $encabezado=array("estadoNivel"=>$colecciones);

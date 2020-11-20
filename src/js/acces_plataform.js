@@ -28,7 +28,6 @@ const LOGIN = new Vue({
             datos = {
                 email : elementos.email.value,
                 password: elementos.password.value,
-               
             }
             //zac@gmail.com 56456
            if(LOGIN.validarCamposVaciosAccess(elementos)){
@@ -37,19 +36,22 @@ const LOGIN = new Vue({
                let formdata = LOGIN.toFormData(datos, 'autenticacion');
             axios.post(URL, formdata)
             .then(function (response) {
-                console.log(response);
+                let datosUser = response.data;
+                // console.log(datosUser);
+                LOGIN.sesssionUser(datosUser)
                 LOGIN.btnIniciar = null;
                 LOGIN.iconRfresh = "fas fa-redo-alt fa-spin fa-2x";
-                if(response.data == "1"){
+               
+                if(sessionStorage.getItem('rol') === "1"){
                      window.location.href = "../view/index.php";
-                } else if(response.data == "11"){
+                } else if(sessionStorage.getItem('rol') === "11"){
                     window.location.href = "../index.php";
                 }else if(response.data == "NA"){
-                    LOGIN.alertMessage("myalert alert-fail","Su contraseña es incorrecta " + response.data, "fas fa-times bg-fail");
+                    LOGIN.alertMessage("myalert alert-fail","Su contraseña o email es incorrecto " ,"fas fa-times bg-fail");
                     LOGIN.btnIniciar = "INICIAR";
                     LOGIN.iconRfresh = null;
                 }else{
-                    LOGIN.alertMessage("myalert alert-fail","Hubi un error en su datos, verifiquelos" + response.data, "fas fa-times bg-fail");
+                    LOGIN.alertMessage("myalert alert-fail","Hubi un error en su datos, verifiquelos", "fas fa-times bg-fail");
                     LOGIN.btnIniciar = "INICIAR";
                     LOGIN.iconRfresh = null;
                 }
@@ -57,6 +59,32 @@ const LOGIN = new Vue({
             
            }
         },
+
+        sesssionUser: function(datosUser){
+            if(datosUser != 0){
+                if(datosUser.idRol == "11"){
+                    sessionStorage.setItem('estudiante',datosUser.idEstudiante);
+                }
+                sessionStorage.setItem('rol', datosUser.idRol);
+                sessionStorage.setItem('usuario',datosUser.idUsuario);
+                sessionStorage.setItem('nombre',datosUser.nombre);
+                sessionStorage.setItem('aPaterno',datosUser.apellidoPaterno);
+                sessionStorage.setItem('aMaterno',datosUser.apellidoMaterno);
+                sessionStorage.setItem('fNacimineto',datosUser.fechNacimineto);
+                sessionStorage.setItem('edad',datosUser.edad);
+                sessionStorage.setItem('sexo',datosUser.sexo);
+                sessionStorage.setItem('email',datosUser.email);
+                sessionStorage.setItem('telefono',datosUser.telefono);
+                sessionStorage.setItem('password',datosUser.password);
+                sessionStorage.setItem('estadoUser',datosUser.estadoUser);
+                sessionStorage.setItem('idPlataforma',datosUser.idPlataforma);
+                sessionStorage.setItem('imagen',datosUser.imagen);
+                sessionStorage.setItem('nombreRol',datosUser.nombreRol);
+                sessionStorage.setItem('ingreso',datosUser.ingreso);
+                sessionStorage.setItem('status',datosUser.status);
+            }
+        },
+
         acceptTerminos: function () {
            let chkTerminos = document.getElementById('acceptTerms').checked;
            (chkTerminos) ? LOGIN.buttonEnable = false : LOGIN.buttonEnable = true ;

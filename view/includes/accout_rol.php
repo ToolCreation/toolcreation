@@ -1,17 +1,5 @@
 
-            <div style="display: none">
-               <input type="text" name="" id="fechaNacimiento" value="<?php  echo  $_SESSION['FNacimiento'];?>" >  
-               <input type="text" name="" id="sexoUser" value="<?php  echo  $_SESSION['sexo'];?>" >   
-               <input type="text" name="" id="imagenUsuario" value="<?php  echo  $_SESSION['imagen'];?>" placehoder= "Imagen" >  
-               <input type="text" name="" id="telefonoUser" value="<?php  echo  $_SESSION['telefono'];?>" placehoder= "Imagen" >   
-               <input type="text" name="" id="idUser" value="<?php  echo  $_SESSION['ID_usuario'];?>" placehoder= "Imagen" > 
-               <input type="text" name="" id="idUserProfesor" value="<?php  echo  $_SESSION['idProfesor'];?>" placehoder= "Imagen" >
-               <input type="text" name="" id="idValueGrado" value="<?php  echo  $_SESSION['gradoConocimiento'];?>" placehoder= "Imagen" > 
-               <input type="text" name="" id="idValueEstancia" value="<?php  echo  $_SESSION['estancia'];?>" placehoder= "Imagen" >  
-
-
-
-            </div>
+           
             <div class="content-profile">
                 <h2>Configuración</h2>
                 <div class="tabs">
@@ -111,18 +99,17 @@
                                     <button  type="button" id="btn-updateUserAccount" class="btn btn-success "   @click= "updateInfoAccount" v-bind:disabled="buttonEnable" ><i class="far fa-edit"></i> Actualizar</button>
                             </div>
                     </div>
-                    <div v-if="profesorLog" class="tab_wrap" style="display: none;">
+                    <div v-if="profesorLog" class="tab_wrap" style="display: none;" >
                         <div class="title">Datos de Profesor</div>
                         <div class="tab_content">
                         <form action="">
                             <div class="my-form-row">
-                            <select name="" class="input-50" id="idConocimiento">
+                                        <select name="" class="input-50" id="comboConocimiento">
                                             <option value="0">Seleccione su grado de conociminento</option>
                                              <option v-for="Conocimiento in comboConocimiento" v-bind:value="Conocimiento.id">{{Conocimiento.nombreGrado}}</option>
-                                            
                                         </select>
 
-                                        <select name="" class="input-50" id="idEstancia">
+                                        <select name="" class="input-50" id="comboEstancia">
                                                     <option value="0">Seleccione su escuela de formacion</option>
                                                      <option v-for="Estancia in comboEstancia" v-bind:value="Estancia.id">{{Estancia.nombreEstancia}}</option> 
                                         </select>

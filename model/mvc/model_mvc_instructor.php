@@ -4,7 +4,6 @@ require('conexionPDO.php');
 class MVCProfesor{
     protected $db;
     protected $conn;
-    protected $params;
     protected $sql;
     protected $sql2;
     protected $conexion;
@@ -99,23 +98,27 @@ class MVCProfesor{
         }
     }
     public function update(){
+        session_start();
         $this->sql = "CALL sp_update_profesor('$this->gradoConocimiento', '$this->estancia', '$this->idInstructor')";
+        $_SESSION['gradoConocimiento'] = $this->gradoConocimiento;
+        $_SESSION['estancia']          = $this->estancia;
         $actulizar = $this->conn->query( $this->sql );
         return $actulizar;
     }
 
-    public function mostrarDatosDeLogeo(){
+    public function registrarNuevoProfesor(){
         $registro = $this->registrarProfesor();
         if($registro){
             $arrayDataProfesor = $this->autentificarProfesor();
             if($arrayDataProfesor[0] == 0){
                 return '0';
             }else{
-                $_SESSION['idProfesor']        = $arrayDataProfesor[0];
-                $_SESSION['gradoConocimiento'] = $arrayDataProfesor[1];
-                $_SESSION['estancia']          = $arrayDataProfesor[2];
-                $_SESSION['profesor']          = "YES";
-                return 'OK';
+                // $_SESSION['idProfesor']        = $arrayDataProfesor[0];
+                // $_SESSION['gradoConocimiento'] = $arrayDataProfesor[1];
+                // $_SESSION['estancia']          = $arrayDataProfesor[2];
+                // $_SESSION['profesor']          = "YES";
+
+                return $arrayDataProfesor;
             }
         }else{
             return 'ErrorRegistro '.$registro;

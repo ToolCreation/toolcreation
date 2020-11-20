@@ -31,7 +31,6 @@ session_start();
         <?php require('sections/dropdown.php'); ?>
     
               <button id="btn-menu-principal" class="btn-menu-principal"><i class="fas fa-bars"></i></button> 
-              <div><input type="text" id="idUsuario" style="display: none" value="<?php echo  $_SESSION['status']  ?>" ></div>
         </header>
 
         <section class="welcome-principal">
@@ -265,14 +264,15 @@ session_start();
         ?>
     </div>
      <!--============================================= SRC JS ==================================================-->
+     <script src="https://js.stripe.com/v3/"></script>
      <script src="src/js/axios.min.js"></script>
      <script src="src/js/vue.js"></script>
-     <script src="https://momentjs.com/downloads/moment-with-locales.min.js"></script>
+     <script src="src/plugins/moment-with-locales.min.js"></script>
      <script src="src/js/cliente_plataform.js"></script>
      <script src="src/js/menu_principal.js"></script>
      <script src="src/js/dropdown.js"></script>
      <script src="src/js/jquery-3.5.1.min.js"></script>
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" charset="utf-8"></script>
+     <script src="src/plugins/owl.carousel.min.js" charset="utf-8"></script>
     
     <script>
         $(".services").owlCarousel({

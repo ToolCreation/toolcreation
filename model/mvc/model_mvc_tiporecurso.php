@@ -76,8 +76,8 @@ class  MVCTipoRecurso  {
          
         while( $row=mysqli_fetch_array($select) ){
             $colecciones[] = array(
-               'id' =>  $row['Int_IdTipo_Rec'],
-               'nombreTipoRec'  =>  $row['Vch_NombreTipo_Rec']
+               'id' =>   utf8_encode($row['Int_IdTipo_Rec']),
+               'nombreTipoRec'  =>   utf8_encode($row['Vch_NombreTipo_Rec'])
             );
         }
          $encabezado=array("tipoRec"=>$colecciones);

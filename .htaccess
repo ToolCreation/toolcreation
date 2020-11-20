@@ -2,4 +2,4 @@ ErrorDocument 404 http://localhost/toolcreation/errors/404.html
 Options +FollowSymLinks
 RewriteEngine on
 
-RewriteRule ^view/detailcurso/([0-9]+)$ view/detailcurso.php?id=$1
+RewriteRule ^./detailcurso/([0-9]+)$ ./detailcurso.php?idcurso=$1

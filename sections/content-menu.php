@@ -6,8 +6,8 @@
         </div>
         
         <div class="botones-header"  v-if="!logeado">
-            <a class="btn-register-log" href="./public/register.html">Registrar</a>
-            <a class="btn-access-log" href="./public/login.html">ingresar</a>              
+            <a class="btn-register-log text-decoration-none" href="./public/register.html">Registrar</a>
+            <a class="btn-access-log text-decoration-none" href="./public/login.html">ingresar</a>              
         </div>
 
 </nav>

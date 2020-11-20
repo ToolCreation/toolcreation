@@ -1,15 +1,15 @@
 <?php
 require('conexion.php');
 class MVCTemas{
-    protected $db;
-    protected $conn;
-    private $sql;
-    private $idTema;
-    private $nombre;
-    private $descripcion;
-    private $idCurso;
-    private $estado;
-    public function getIdTema(){return $this->idTema;}
+   protected $db;
+   protected $conn;
+   private $sql;
+   private $idTema;
+   private $nombre;
+   private $descripcion;
+   private $idCurso;
+   private $estado;
+   public function getIdTema(){return $this->idTema;}
 	public function setIdTema($idTema){	$this->idTema = $idTema;}
 	public function getNombre(){return $this->nombre;}
 	public function setNombre($nombre){	$this->nombre = $nombre;}
@@ -63,11 +63,11 @@ class MVCTemas{
         
        while( $row=mysqli_fetch_array($search) ){
            $tema[] = array(
-              'id' =>  $row['Int_Id_Tema_Curso'],
-              'nombre'  =>  $row['Vch_Nombre_Tema_C'],
-              'descripcion' => $row['Vch_Descripcion_T'],
-              'estado' => $row['Int_VchEstado_T'],
-              'idCurso' => $row['Int_FkCurso']
+              'id' =>   utf8_encode($row['Int_Id_Tema_Curso']),
+              'nombre'  =>  utf8_encode( $row['Vch_Nombre_Tema_C']),
+              'descripcion' =>  utf8_encode($row['Vch_Descripcion_T']),
+              'estado' =>  utf8_encode($row['Int_VchEstado_T']),
+              'idCurso' =>  utf8_encode($row['Int_FkCurso'])
            );
        }
         $encabezado=array("temas"=>$tema);

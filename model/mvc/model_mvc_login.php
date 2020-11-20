@@ -23,7 +23,6 @@ class MVCLogin {
     private $plataforma;
     private $rol;
     private $imagen;
-    private $logeo;
     private $rutaActual;
     private $idUsuario;
    

@@ -218,6 +218,7 @@ const NIVEL_ESTUDIOS = new Vue({
                     .then(function (response) {
                         console.log(response);
                     if(response.data == "1"){
+                        sessionStorage.clear();
                         window.location.href = "../public/login.html";
                     }else{
                         NIVEL_ESTUDIOS.alertMessage("myalert alert-fail","Hubo un error al  cerrar sesion" + response.data, "fas fa-times bg-fail");

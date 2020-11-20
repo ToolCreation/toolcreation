@@ -73,8 +73,8 @@ class  MVCGradoConocimiento  {
          
         while( $row=mysqli_fetch_array($select) ){
             $colecciones[] = array(
-               'id' =>  $row['Int_IdGradoInstructor'],
-               'nombreGrado'  =>  $row['Vch_Nombre_Grado_Inst']
+               'id' =>   utf8_encode($row['Int_IdGradoInstructor']),
+               'nombreGrado'  =>   utf8_encode($row['Vch_Nombre_Grado_Inst'])
             );
         }
          $encabezado=array("gradoConocimiento"=>$colecciones);

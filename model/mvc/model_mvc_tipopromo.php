@@ -59,8 +59,8 @@ class MVCTipoPromocion{
          
         while( $row=mysqli_fetch_array($select) ){
             $rol[] = array(
-               'id' =>  $row['Int_Id_Tipo_Prom'],
-               'nombreTipoPromo'  =>  $row['Vch_NombreTipo_Pro']
+               'id' =>   utf8_encode($row['Int_Id_Tipo_Prom']),
+               'nombreTipoPromo'  =>   utf8_encode($row['Vch_NombreTipo_Pro'])
             );
         }
          $encabezado=array("tipo"=>$rol);

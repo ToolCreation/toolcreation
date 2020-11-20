@@ -1,11 +1,16 @@
 const ENDPOINT_LOG_ALUMNO   = "controller/controller_login.php";
 const ENDPOINT_LOG_PROFESOR = "controller/controller_instructor.php";
 const ENDPOINT_CURSOS = "controller/controller_curso.php";
+const ENDPOINT_CATEGORIAS = "controller/controller_categoria.php";
+const ENDPOINT_VENTAS = "controller/controller_ventas.php";
+
 var d = document;
 
 //CLIENTE.alertMessage("myalert alert-infoDanger","Archivo no valido","fas fa-exclamation bg-infoDanger");
 //CLIENTE.alertMessage("myalert alert-correct","Se ha eliminado el estado exitosamente","fas fa-check bg-correct")
 // CLIENTE.alertMessage("myalert alert-fail","El estado no pudo eliminarce" + response.data, "fas fa-times bg-fail");
+
+
 
 const CLIENTE = new Vue({
   el: ".content-principal",
@@ -24,40 +29,94 @@ const CLIENTE = new Vue({
     showModal: 'display:none',
     textButtonProfesor: 'Quiero ser instructor',
     cursosRecent: [],
+    categorias:[],
+    curdoDetailList: [],
+    myCursosDetail: [],
+    idCategory: 0,
+  
   
   },
+  created: function(){
+    this.cargarMisCursos();
+  },
   mounted: function() {
+   
     this.loadCursos();
+    this.loadCategorias();
     this.comprobarLogeo();
-    this.setValoresAcount();
+   
+    if(this.logeado){
+      this.setValoresAcount();
+    }
 
+    
  },
   methods: {
+    inputSearchNameCurso: function(){
+      let buscar = d.getElementById("searchCurseName").value;
+      d.querySelectorAll('.card-curso-result').forEach(function(e){
+          if(e.textContent.toLowerCase().includes(buscar)){
+            e.style.display = ''
+          } else{
+           e.style.display = 'none'
+            CLIENTE.alertMessage("myalert alert-infoDanger","No se ha encontrado cursos con ese nombre","fas fa-exclamation bg-infoDanger");
+          }
+         
+        });    
+     },
     getDateHuman:function (dateAPI){
       return moment(dateAPI, "YYYYMMDD").fromNow();
     },
     comprobarLogeo: function(){
-        let idUser =  d.getElementById('idUsuario').value;
-         if(idUser == 'activo'){
+        let statusSesionUser =  sessionStorage.getItem('status');
+         if(statusSesionUser == 'activo'){
              this.logeado = true;
          }
+    },
+    loadCategorias: function() {
+      let formdata = new FormData();
+      formdata.append("option", "showdata")
+      axios.post(ENDPOINT_CATEGORIAS, formdata)
+          .then(function (response) {
+              // console.log(response);
+              //monedas es el arreglo de  JS 
+              CLIENTE.categorias = response.data.categoria;
+          })
     },
     loadCursos: function(){
       let combos = new FormData();
       combos.append('option','showDataCursos')
           axios.post(ENDPOINT_CURSOS, combos).then(function (response) {
-              console.log(response);
+              // console.log(response);
               CLIENTE.cursosRecent = response.data.cursoList;
       })
     },
-  
+    resultCursosForCategory: function(categoria){
+      CLIENTE.idCategory = categoria.id;
+      let parameter = new FormData();
+      parameter.append('option','showFilterCurseCatefory')
+      parameter.append('idCategory', CLIENTE.idCategory)
+          axios.post(ENDPOINT_CURSOS, parameter).then(function (response) {
+              // console.log(response);
+              CLIENTE.cursosRecent = response.data.cursoList;
+      })
+    },
+    cargarMisCursos(){
+      let getData = new FormData();
+      getData.append('option','showCursoPayments')
+      getData.append('estudiante', sessionStorage.getItem('estudiante'))
+      axios.post(ENDPOINT_VENTAS, getData).then(function (response) {
+        console.log(response);
+        CLIENTE.myCursosDetail = response.data.cursoListPayments;
+        })
+    },
     setValoresAcount: function(){
         //Extraccion de valores
         let fechaNacimiento = d.getElementById('fechaNacimiento').value;
         let imgUser = d.getElementById('imagenUsuario').value;
         let sexoUser = d.getElementById('sexoUser').value;
         let tefofonoUser = d.getElementById('telefonoUser').value;
-        console.log(tefofonoUser);
+        // console.log(tefofonoUser);
         let splitFecha = fechaNacimiento.split('-');
         document.getElementById('year').value = splitFecha[0];
         document.getElementById('month').value = splitFecha[1];
@@ -76,7 +135,7 @@ const CLIENTE = new Vue({
         (imgUser === "")  ? this.imgAccount = 'src/img/persona.svg' :   this.imgAccount = 'src/img/perfilUsers/'+imgUser;
           
         //colocacion de telefono
-        (tefofonoUser === "") ? document.getElementById('telefono').value = "" : document.getElementById('telefono').value = tefofonoUser;
+        (tefofonoUser === "" ||  tefofonoUser === "null") ? document.getElementById('telefono').value = "" : document.getElementById('telefono').value = tefofonoUser;
           
     },
     updateInfoPersonal: function (){
@@ -158,6 +217,7 @@ const CLIENTE = new Vue({
       axios.post(ENDPOINT_LOG_ALUMNO, formdata).then(function (response) {
         console.log(response);
         if (response.data == "1") {
+          sessionStorage.clear();
           window.location.href = "index.php";
         } else {
             CLIENTE.alertMessage(
@@ -215,7 +275,18 @@ ingresarInstructor: function(){
   ingresar.append("option","auntentificaion");
   ingresar.append("idUsuario",d.getElementById('idUser').value);
   axios.post(ENDPOINT_LOG_PROFESOR,ingresar).then(response =>{
-    if(response.data.stateFunction == "RegistradoYLogeado"){
+    console.log(response.data);
+    let dataSesionProfesor = response.data;
+    if( dataSesionProfesor.stateFunction == "RegistradoYLogeado" ||
+        dataSesionProfesor.stateFunction == "Logeado"){
+           sessionStorage.setItem('idProfesor', dataSesionProfesor.idProfesor);
+           sessionStorage.setItem('gradoConocimiento', dataSesionProfesor.gradoConocimiento);
+           sessionStorage.setItem('estancia', dataSesionProfesor.estancia);
+           sessionStorage.setItem('success', dataSesionProfesor.success);
+           sessionStorage.setItem('stateFunction', dataSesionProfesor.stateFunction);
+        }
+
+    if(dataSesionProfesor.stateFunction == "RegistradoYLogeado"){
          CLIENTE.showModal = "display:flex";
         setTimeout(function () {
           window.location.href = "view/profesor/index.php";
@@ -226,7 +297,7 @@ ingresarInstructor: function(){
             window.location.href = "view/profesor/index.php";
         }, 1500);
     }
-    console.log(response.data);
+    
     
 
 });
@@ -270,9 +341,9 @@ previewImage: function(e){
       CLIENTE.alertgeneral = classe;
       CLIENTE.messagealert = message;
       CLIENTE.alerticon = iconName;
-    //   setTimeout(function () {
-    //     CATEGORIA.limpiarAlertas();
-    // }, 3000);
+      setTimeout(function () {
+        CLIENTE.limpiarAlertas();
+    }, 3000);
     
   },
   toFormData: (obj, option) => {
@@ -287,6 +358,7 @@ previewImage: function(e){
     let valor = 'idcurso='+id; 
     window.location.href = 'detailcurso.php?'+valor;
   },
+  
   
   },
   

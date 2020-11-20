@@ -20,7 +20,7 @@
                                 <a  href="acount.php" ><i class="fas fa-user"></i> Cuenta</a>
                             </li>
                             <li>
-                                <a href="#"><i class="fas fa-photo-video"></i> Mi cursos</a>
+                                <a href="miscursos.php"><i class="fas fa-photo-video"></i> Mi cursos</a>
                             </li>
                             <li>
                                 <a href="#" @click="closeSesionRol()"><i class="fas fa-sign-out-alt"></i> Salir </a>

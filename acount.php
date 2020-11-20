@@ -32,7 +32,7 @@ session_start();
               <button id="btn-menu-principal" class="btn-menu-principal"><i class="fas fa-bars"></i></button> 
               <div><input type="text" id="idUsuario" style="display: none" value="<?php echo  $_SESSION['status']  ?>" ></div>
         </header>
-            <div style="display: none">
+            <div style="display:none">
                <input type="text" name="" id="fechaNacimiento" value="<?php  echo  $_SESSION['FNacimiento'];?>" >  
                <input type="text" name="" id="sexoUser" value="<?php  echo  $_SESSION['sexo'];?>" >   
                <input type="text" name="" id="imagenUsuario" value="<?php  echo  $_SESSION['imagen'];?>" placehoder= "Imagen" >  
@@ -59,6 +59,7 @@ session_start();
 
     </div>
      <!--============================================= SRC JS ==================================================-->
+     <script src="https://js.stripe.com/v3/"></script>
      <script src="src/js/axios.min.js"></script>
      <script src="src/js/vue.js"></script>
      <script src="src/js/cliente_plataform.js"></script>

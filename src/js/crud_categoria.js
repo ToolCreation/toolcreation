@@ -217,6 +217,7 @@ const CATEGORIA = new Vue({
             axios.post("../controller/controller_login.php", formdata)
                     .then(function (response) {
                         console.log(response);
+                        sessionStorage.clear();
                     if(response.data == "1"){
                         window.location.href = "../public/login.html";
                     }else{

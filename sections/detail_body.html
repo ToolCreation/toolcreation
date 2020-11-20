@@ -22,7 +22,9 @@
     <div class="info-presentacion">
         <div class="cost-curso">
             <div class="content-boton">
-                    <button type="button" class="btn-incribirte" @click="gotoPay">Incriberte ahora</button>
+                    <button  v-if="statusVentaCurso == 'NO COMPRADO'" type="button" class="btn-incribirte" @click="gotoPay(curso)">Incriberte ahora</button>
+                    <button v-if="statusVentaCurso == 'COMPRADO'" type="button" class="btn-incribirte" @click="gotoMyCurse()">Seguir Aprendiendo</button>
+        
                     <p> {{curso.precio}} {{curso.moneda}}</p>
                     <div class="enlaces-share">
                         <a href="#"><i class="far fa-heart"></i> Agregar</a>
