@@ -20,6 +20,10 @@ class MVCCurso {
     private $instructor;
     private $imagenCurso;
     private $rutaActualImagen;
+    private $tipoImagen;
+    private $tipoVideo;
+
+   
 
     public function getId(){return $this->idCurso;}
 	public function setId($idCurso){$this->idCurso = $idCurso;	}
@@ -69,7 +73,7 @@ class MVCCurso {
 
      public function insertData(){
          $fechaHoy = date('Y-m-d');
-        if($this->imagenCurso == null){
+        if($this->imagenCurso == null && $this->videoPrueba == null){
             $this->sql = "CALL sp_curso_create_no_imagen('$this->nombre','$this->conocimiento', '$this->descripcion',
                                                         '$this->requistos', '$this->categoria','$this->nivel',
                                                         '$this->precio', '$this->moneda', '$this->instructor', '$fechaHoy',
@@ -77,14 +81,34 @@ class MVCCurso {
             $insert = $this->conn->query($this->sql);
 
         }else{
-            $this->sql = "CALL sp_curso_create_imagen('$this->nombre', '$this->conocimiento', '$this->descripcion', 
+            if( ($this->tipoImagen["type"]=='image/jpeg') ||
+                ($this->tipoImagen["type"]=='image/png') || 
+                ($this->tipoImagen["type"]=='image/jpg') ||
+                ($this->tipoVideo["type"]=='video/mpeg') ||
+                ($this->tipoVideo["type"]=='video/ogg') ||
+                ($this->tipoVideo["type"]=='video/mp4')
+                ){
+                $this->sql = "CALL sp_curso_create_imagen('$this->nombre', '$this->conocimiento', '$this->descripcion', 
                                                         '$this->requistos', '$this->categoria','$this->nivel', 
                                                          '$this->precio', '$this->moneda', '$this->instructor', '$fechaHoy',
-                                                         '$this->imagenCurso', '$fechaHoy') ";
+                                                         '$this->imagenCurso', '$fechaHoy', '$this->videoPrueba') ";
+            }else{
+                $titleMessage = array("msj"=>"errorFile", 
+                                      "detailError"=>"el archivo no es valido, ingrese una imagen o video valido");
+                    return json_encode($titleMessage);
+            }
+           
             $insert = $this->conn->query($this->sql);
             if($insert){
-               $ruta = "../src/img/bannerscursos/".$this->imagenCurso;
-                move_uploaded_file($this->rutaActualImagen,$ruta);
+                if($this->imagenCurso != null){
+                    $rutaImagen = "../src/img/bannerscursos/".$this->imagenCurso;
+                    move_uploaded_file($this->rutaActualImagen,$rutaImagen);
+                }
+                if($this->videoPrueba != null){
+                    $rutaVideo = "../src/videos/cursos/".$this->videoPrueba;
+                    move_uploaded_file($this->rutaVideoActual,$rutaVideo);
+                }
+                 
             }
           
         }
@@ -93,7 +117,7 @@ class MVCCurso {
 
      public function updateData(){
         $fechaHoy = date('Y-m-d');
-       if($this->imagenCurso == null){
+       if($this->imagenCurso == null && $this->videoPrueba == null){
            $this->sql = "CALL sp_curso_update('$this->nombre', '$this->conocimiento', '$this->descripcion',
                                                '$this->requistos', '$this->categoria', '$this->nivel', '$this->precio', 
                                                '$this->moneda','$fechaHoy', '$this->idCurso')";
@@ -101,13 +125,33 @@ class MVCCurso {
            $update = $this->conn->query($this->sql);
 
        }else{
-           $this->sql = "CALL sp_curso_update_image('$this->nombre', '$this->conocimiento', '$this->descripcion',
+            if( ($this->tipoImagen =='image/jpeg') ||
+                ($this->tipoImagen =='image/png') || 
+                ($this->tipoImagen =='image/jpg') ||
+                ($this->tipoVideo == 'video/mpeg') ||
+                ($this->tipoVideo =='video/ogg') ||
+                ($this->tipoVideo =='video/mp4')
+            ){
+                $this->sql = "CALL sp_curso_update_image('$this->nombre', '$this->conocimiento', '$this->descripcion',
                                                     '$this->requistos','$this->categoria', '$this->nivel', '$this->precio',
-                                                     '$this->moneda' ,'$fechaHoy', '$this->imagenCurso' ,'$this->idCurso' )";
+                                                     '$this->moneda' ,'$fechaHoy', '$this->imagenCurso' ,'$this->idCurso', '$this->videoPrueba' )";
+            }else{
+                $titleMessage = array("msj"=>"errorFile", 
+                "detailError"=>"el archivo no es valido, ingrese una imagen o video valido");
+                return json_encode($titleMessage);
+            }
+           
            $update = $this->conn->query($this->sql);
            if($update){
-              $ruta = "../src/img/bannerscursos/".$this->imagenCurso;
-               move_uploaded_file($this->rutaActualImagen,$ruta);
+               if($this->imagenCurso != null){
+                $ruta = "../src/img/bannerscursos/".$this->imagenCurso;
+                move_uploaded_file($this->rutaActualImagen,$ruta);
+               }
+             
+               if($this->videoPrueba != null){
+                $rutaVideo = "../src/videos/cursos/".$this->videoPrueba;
+                move_uploaded_file($this->rutaVideoActual,$rutaVideo);
+               }
            }
          
        }
@@ -215,7 +259,8 @@ class MVCCurso {
                'imgCurso' =>  utf8_encode($row['vchImagenCurso']),
                'dateModificacion' =>  utf8_encode($row['DT_UltimaFecha_modificacion']),
                'instructor' =>  utf8_encode($row['nombreInstructor']),
-               'imgUser' => utf8_encode( $row['imgUser'])
+               'imgUser' => utf8_encode( $row['imgUser']),
+               
             );
         }
         $encabezado=array("cursoList"=>$cursoListFilter);
@@ -243,7 +288,8 @@ class MVCCurso {
                'imgCurso' =>  utf8_encode($row['vchImagenCurso']),
                'dateModificacion' =>  utf8_encode($row['DT_UltimaFecha_modificacion']),
                'instructor' =>  utf8_encode($row['nombreInstructor']),
-               'imgUser' =>  utf8_encode($row['imgUser'])
+               'imgUser' =>  utf8_encode($row['imgUser']),
+               'videoPresentacion' => utf8_encode( $row['videoPresentacion'])
             );
         }
         $encabezado=array("cursoDetail"=>$cursoDetalle);
@@ -251,4 +297,34 @@ class MVCCurso {
         $this->closeConnection();
         return $json_string;  
      }
+     public function obtenerPorcentaje($estudiante){
+        $this->sql = "SELECT fn_calcularPorcentajeCurso('$this->idCurso', '$estudiante') AS porcentaje";
+        $calcular = $this->conn->query($this->sql);
+        $porcentaje = mysqli_fetch_array($calcular);
+        $this->closeConnection();
+        return $porcentaje[0];
+     }
+
+   
+    public function getTipoImagen()
+    {
+        return $this->tipoImagen;
+    }
+
+    public function setTipoImagen($tipoImagen)
+    {
+        $this->tipoImagen = $tipoImagen;
+    }
+
+     
+    public function getTipoVideo()
+    {
+        return $this->archivoVideo;
+    }
+
+   
+    public function setTipoVideo($tipoVideo)
+    {
+        $this->tipoVideo = $tipoVideo;
+    }
  }

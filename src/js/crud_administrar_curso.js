@@ -5,7 +5,8 @@ const ENDPOINT_LOG_PROFESOR = "../../controller/controller_login.php";
 const ENPOINT_TIPOVIDEO = "../../controller/controller_tipovideo.php";
 const ENPOINT_TIPORECURSO = "../../controller/controller_tiporecurso.php";
 
-
+var contentLoad = document.querySelector(".content-spinner");
+var spinner = document.getElementById("spinner");
 var d = document;
 const ADMIN_CURSO = new Vue({
     el: "#contenedor",
@@ -138,6 +139,8 @@ const ADMIN_CURSO = new Vue({
                     console.log(response);
                     //monedas es el arreglo de  JS 
                     ADMIN_CURSO.listaVideos = response.data.videos;
+                    console.info('PrimerVideo Videos')
+                    // console.log(ADMIN_CURSO.listaVideos[0].URLvideo)
                 })
         },
         cargarListaTipoVideo: function () {
@@ -297,21 +300,27 @@ const ADMIN_CURSO = new Vue({
         },
         //CRUD VIDEOS
         insertVideo: function (){
+          
+            let getVideo = document.getElementById("insert-video").files[0];
             let datos = {
                 nombreVideo: d.getElementById("insert-nombre-video").value,
                 tipo: d.getElementById("insert-res-video").value,
                 tema: d.getElementById("insert-tema-video").value,
-                url: d.getElementById("insert-url").value
+                url: d.getElementById("insert-url").value,
+                video: getVideo
               };
+              console.log(getVideo);
             if(ADMIN_CURSO.validarCamposVideos(datos) ){
                                      //nombre de la clase de CSS - Mensaje - clase css de icono
                ADMIN_CURSO.alertMessage("myalert alert-infoDanger","Campos vacios","fas fa-exclamation bg-infoDanger");
-            }else {
+            } else {
+                ADMIN_CURSO.mostrarSpinner();
             let formData = ADMIN_CURSO.toFormData(datos,'insert');
                 axios
                 .post(ENDPOINT_VIDEOS, formData)
                 .then(response => {
-                if (response.data) {
+                if (response.data == 1) {
+                    ADMIN_CURSO.ocualtarSpinner();
                     ADMIN_CURSO.cargarListaDeVideos();
                     ADMIN_CURSO.alertMessage("myalert alert-correct","Se ha registrado el video exitosamente","fas fa-check bg-correct")
                     ADMIN_CURSO.limpiarCamposVideo();
@@ -321,7 +330,15 @@ const ADMIN_CURSO = new Vue({
                     //permite actulizar la paginacion
                     this.cargarTotalRegistrosVideo();
                     this.paginarVideos(this.paginaActualVideos);
+                }else if(response.data.msj == "errorFile"){
+                    ADMIN_CURSO.ocualtarSpinner();
+                    ADMIN_CURSO.alertMessage("myalert alert-fail", response.data.detailError, "fas fa-times bg-fail");
+                    setTimeout(function () {
+                        ADMIN_CURSO.limpiarAlertas();
+                       }, 3000);
+
                 } else {
+                    ADMIN_CURSO.ocualtarSpinner();
                     ADMIN_CURSO.alertMessage("myalert alert-fail","El video no pudo registrarce" + response.data, "fas fa-times bg-fail");
                     setTimeout(function () {
                         ADMIN_CURSO.limpiarAlertas();
@@ -331,29 +348,42 @@ const ADMIN_CURSO = new Vue({
             } 
         },
         updateVideo: function(){
+            let getVideo = document.getElementById("update-video").files[0];
             let datos = {
                 id: ADMIN_CURSO.idVideo,
                 nombreVideo: d.getElementById("update-nombre-video").value,
                 tipo: d.getElementById("update-res-video").value,
                 tema: d.getElementById("update-tema-video").value,
-                url: d.getElementById("update-url").value
+                url: d.getElementById("update-url").value,
+                video: getVideo
               };
-            console.log(datos);
+            console.log(getVideo);
+
             if(ADMIN_CURSO.validarCamposVideos(datos)){
                 ADMIN_CURSO.alertMessage("myalert alert-infoDanger","Campos vacios","fas fa-exclamation bg-infoDanger");
             }else {
-            let formData = ADMIN_CURSO.toFormData(datos,'update');
+                ADMIN_CURSO.mostrarSpinner();
+                let formData = ADMIN_CURSO.toFormData(datos,'update');
                 axios
                 .post(ENDPOINT_VIDEOS, formData)
                 .then(response => {
                 console.log( response.data)
                 if (response.data) {
+                    ADMIN_CURSO.ocualtarSpinner();
                     ADMIN_CURSO.cargarListaDeVideos();
                     ADMIN_CURSO.alertMessage("myalert alert-correct","Se ha actualizado el video exitosamente","fas fa-check bg-correct")
                     setTimeout(function () {
                         ADMIN_CURSO.limpiarAlertas();
                     }, 3000);
+                }else if(response.data.msj == "errorFile"){
+                    ADMIN_CURSO.ocualtarSpinner();
+                    ADMIN_CURSO.alertMessage("myalert alert-fail", response.data.detailError, "fas fa-times bg-fail");
+                    setTimeout(function () {
+                        ADMIN_CURSO.limpiarAlertas();
+                       }, 3000);
+
                 } else {
+                    ADMIN_CURSO.ocualtarSpinner();
                     ADMIN_CURSO.alertMessage("myalert alert-fail","El video no pudo actulizarce" + response.data, "fas fa-times bg-fail");
                     setTimeout(function () {
                         ADMIN_CURSO.limpiarAlertas();
@@ -404,7 +434,13 @@ const ADMIN_CURSO = new Vue({
             d.getElementById("delete-nombre-video").value = video.nombreVideo;
         },
         validarCamposVideos: function (datos){
-            if( datos.nombreVideo == 0 || datos.tipo == 0 || datos.tema == 0 || datos.url == 0){
+            if( datos.nombreVideo == 0 || datos.tipo == 0 || datos.tema == 0){
+                return true;
+            }
+            return false
+        },
+        validarFilesMediaSelected: function( video){
+            if(video == "" ){
                 return true;
             }
             return false
@@ -443,6 +479,14 @@ const ADMIN_CURSO = new Vue({
                 }
                 });
             } 
+        },
+        mostrarSpinner:function () {
+            contentLoad.removeAttribute("hidden");
+            spinner.removeAttribute("hidden");
+        },
+        ocualtarSpinner:  function () {
+            contentLoad.setAttribute("hidden", "");
+            spinner.setAttribute("hidden", "");
         },
         updateRecurso: function(){
             let datos = {

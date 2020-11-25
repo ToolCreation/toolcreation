@@ -22,10 +22,10 @@ session_start();
         <div class="content-logo-principal">      
             <a href="index.php"><img src="src/img/Logo-ToolCreatiion2.png" width="110" height="70" alt=""></a> 
         </div>
-        <div class="barra-busqueda-principal">
+        <!-- <div class="barra-busqueda-principal">
             <input type="text" placeholder="Buscar">
             <button class="btn-search"><i class="fas fa-search"></i></button>
-        </div>
+        </div> -->
 
         <?php require('sections/content-menu.php');?>
         <?php require('sections/dropdown.php'); ?>
@@ -35,10 +35,10 @@ session_start();
 
         <section class="welcome-principal">
             <h1>Jamás dejes de apreder</h1>
-             <p>En ToolCreation  contamos con varios cursos del sector Tecnoligia, inicia para que no te quedes fuera</p>
+             <p>En ToolCreation  contamos con varios cursos del sector Tecnologia, inicia para que no te quedes fuera</p>
              <img src="./src/img/lear1.svg" alt="">
              <p>
-                <a class="explore" href="">Explorar cursos</a>
+                <a class="explore" href="cursos.php">Explorar cursos</a>
              </p>
            
         </section>
@@ -195,11 +195,11 @@ session_start();
                   <h4 class="team-employee">Marcela Tovar Hernández</h4>
             </div>
 
-            <div class="team-card">
+            <!-- <div class="team-card">
                   <img class="team-thumb" src="./src/img/perfilUsers/pedro.jpg" alt="">
                   <p class="team-position">Programador</p>
                   <h4 class="team-employee">Pedro Gonzales Rivera</h4>
-            </div>
+            </div> -->
 
             <div class="team-card">
                   <img class="team-thumb" src="./src/img/perfilUsers/efra.jpg" alt="">

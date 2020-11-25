@@ -94,4 +94,5 @@ class MVCPayment{
         $this->closeConnectionDB();
         return $json_string;
      }
+     
 }

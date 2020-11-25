@@ -37,4 +37,5 @@ switch($operacion)
             //implmentacio de singleton y MVC
             echo $objEstadoTema->countRegister();
         break;
+       
 }

@@ -14,10 +14,63 @@ session_start();
     <link rel="stylesheet" href="../../src/css/style.css">
     <link rel="stylesheet" href="../../src/icons/all.css">
     <link rel="stylesheet" href="../../src/css/bootstrap.css">
-   
+    <style>
+        .button-pay{
+                width: 100% ;
+                margin-top: 1rem;
+                border:none;
+                color: white;
+                background: #f87c4b;
+                padding: .8rem 3.5rem ;
+                cursor: pointer;
+                border-radius: 5px;
+            }
+        .content-spinner:not([hidden]){
+                margin-top: 0;
+                width: 100%;
+                position: fixed;
+                height: 100%;
+                padding: 20px;
+                background: rgba(32, 32, 32, 0.5);
+                z-index: 1000;
+            }
+        #spinner:not([hidden]) {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+        #spinner::after {
+                content: "";
+                width: 80px;
+                height: 80px;
+                border: 2px solid #f3f3f3;
+                border-top: 3px solid #f87c4b;
+                border-radius: 100%;
+                will-change: transform;
+                animation: spin 1s infinite linear;
+            }
+
+        @keyframes spin {
+                from {
+                        transform: rotate(0deg);
+                }
+                to {
+                        transform: rotate(360deg);
+                }
+             }
+    </style>
 
 </head>
 <body>
+  <div hidden class="content-spinner">
+            <div hidden id="spinner"></div>
+    </div>
 <div class="contenedor active" id="contenedor">
         <?php   require '../includes/header.php'?>
 
@@ -138,6 +191,15 @@ session_start();
                              </select>
                         </div>
                     </div>
+                    <div class="row">
+                      <div class="form-group col">
+                      <label for="">Seleccione un video</label>
+                          <div class="custom-file">
+                                  <input type="file" class="custom-file-input" id="customFileVideo-insert" @change="">
+                                  <label class="custom-file-label" for="customFile">Nombre del archivo</label>
+                          </div>
+                        </div>
+                    </div>
                     
                     
                   </form>
@@ -230,7 +292,15 @@ session_start();
                              </select>
                         </div>
                     </div>
-                    
+                    <div class="row">
+                      <div class="form-group col">
+                         <label for="">Seleccione un video</label>
+                          <div class="custom-file">
+                                  <input type="file" class="custom-file-input" id="customFileVideo-update" @change="">
+                                  <label class="custom-file-label" for="customFile">Nombre del archivo</label>
+                          </div>
+                        </div>
+                    </div>
                     
                   </form>
                 </div>

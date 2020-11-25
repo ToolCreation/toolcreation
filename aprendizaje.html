@@ -8,31 +8,17 @@
     <link rel="stylesheet" href="src/css/bootstrap.css">
     <link rel="stylesheet" href="src/css/aprendizaje.css">
     <link rel="stylesheet" href="src/icons/all.css">
+    <link href="https://vjs.zencdn.net/7.10.2/video-js.css" rel="stylesheet" />
+
+    <!-- If you'd like to support IE8 (for Video.js versions prior to v7) -->
+    <script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
 </head>
 <body>
     <div id="container-learn">
-        <header class="navbar navbar-dark bg-dark">
-            <div class="container-nav-learn">
-                <div class="item-nav-1">
-                    <h2 style="color: aliceblue;">Titulo de curso</h2>
-                </div>
-                <div class="item-nav-2">
-                    <div class="container-progres-bar">
-                        <div class="progres-bar">
-                        </div>
-                    </div>
-                    <span style="color: aliceblue;"><i class="fas fa-trophy"></i>Progreso</span>
-                    
-                </div>
-            </div>
-          
-            
-        </header>
-      
         <nav id="sidebar">
-            <button type="button" id="menuToggle" title="show menu">
+            <!-- <button type="button" id="menuToggle" title="show menu">
                 <i class="fas fa-arrow-left"> </i>Contenido
-            </button>
+            </button> -->
             <div class="header-sidebar">
                 <h3>Contenido del curso</h3>
                 <button type="button" id="btnClosed" class="close-sidebar">
@@ -40,29 +26,92 @@
                 </button>
             </div>
             <div class="section-temas">
-                <a href="#">Nombre de tema</a>
-                <a href="#">Nombre de tema</a>
-                <a href="#">Nombre de tema</a>
+                <div class="content-tema" v-for="tema in listaVideos"  >
+                        <a v-if="tema.estadoTema == 'VISTO' " href="#" @click="viewVideo(tema)" style="background-color: #06D6A0; color: white;" >
+                        {{tema.nombreTema   }} 
+                        <i class="fas fa-check" style="margin-left: 4rem; color: #03946d;"></i>
+                       </a>
+                       <a v-else="tema.estadoTema == 'NO VISTO' " href="#" @click="viewVideo(tema)" >
+                        {{tema.nombreTema}} 
+                       </a>
+                </div>
+               
+               
             </div>
         </nav>
+        <header class="navbar navbar-dark bg-dark">
+            <div class="container-nav-learn">
+                <div class="item-nav-1">
+                    <h2 style="color: aliceblue;">{{tituloCurso}}</h2>
+                </div>
+                <div class="item-nav-2">
+                    <div class="container-progres-bar">
+                        <div class="progres-bar"  v-bind:style="'width:'+porcentaje+'%;'">
+                        </div>
+                    </div>
+                    <span style="color: aliceblue;"><i class="fas fa-trophy"></i>Progreso</span>
+                    
+                </div>
+                <div class="item-nav-3">
+                    <button type="button" id="menuToggle" title="show menu">
+                        <i class="fas fa-arrow-left"></i> Contenido
+                    </button>
+                </div>
+            </div>
+          
+            
+        </header>
+       
+        
       
-        <div class="">
-            <p>Apredizaje</p>
+        <div class="container-video" >
+            
+            <video width="500" 
+                   controls 
+                   id="fm-video"
+                   class="fm-video video-js vjs-16-9 vjs-big-play-centered" @ended="enviarTemaVisto()" >
+                <source v-bind:src="'src/videos/cursos/'+videoPlay" type="video/mp4" >
+            </video>
+        </div>
+
+        <div class="recursos-curso">
+            <h2>Recurso del Curso</h2>
+            <div  class="content-card">
+                <div v-for="recurso in listaRecursos" class="card-recurso">
+                    <p>{{recurso.nombreRecurso}}</p>
+                    <a v-bind:href="recurso.URL" target="_blank">{{recurso.nombreVideo}}</a>
+                </div>
+                
+            </div>
         </div>
     </div>
+    
+    <script src="src/js/axios.min.js"></script>
+    <script src="src/js/vue.js"></script>
+    <script src="src/js/aprendizaje.js"></script>
+    <script src="https://vjs.zencdn.net/7.10.2/video.js"></script>
+    <script>
+        var $reproductor = videojs('fm-video', {
+            fluid: true
+        })
+    </script>
     <script>
         let sidebar = document.getElementById('sidebar');
         let buttonMenu = document.getElementById('menuToggle')
         let buttonClosed = document.getElementById('btnClosed');
         buttonMenu.addEventListener('click', ()=>{
             sidebar.classList.add('open');
-            buttonMenu.classList.add('d-none');
+            // buttonMenu.classList.add('d-none');
         });
 
         buttonClosed.addEventListener('click', ()=>{
             sidebar.classList.remove('open');
-            buttonMenu.classList.remove('d-none');
+            // buttonMenu.classList.remove('d-none');
         })
     </script>
+
+
+
+   
 </body>
 </html>

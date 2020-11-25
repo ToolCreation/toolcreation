@@ -1449,7 +1449,6 @@ th {
       display: none;
       transition: all .3s ease-in; }
     .content-login .content-form-login .page1.active {
-      display: block;
       transition: all .3s ease-in; }
   .content-login .content-info {
     height: 100%;
@@ -1523,7 +1522,6 @@ th {
 .content-login .content-form-login .progress-bar li::after {
   content: '';
   width: 120%;
-  height: 2px;
   background: #333;
   position: absolute;
   left: -95%;
@@ -1586,6 +1584,61 @@ th {
       border-color: rgba(0, 0, 0, 0.26); }
     .md-checkbox input[type="checkbox"]:disabled:checked + label:before {
       background: rgba(0, 0, 0, 0.26); }
+
+@media screen and (max-width: 1000px) {
+  .content-login {
+    width: 85%;
+    flex-direction: column; }
+    .content-login .content-form-login {
+      order: 2;
+      width: 100%; }
+    .content-login .content-info {
+      order: 1;
+      width: 100%;
+      height: 50%;
+      background-position: center;
+      border-top-left-radius: 8px;
+      border-bottom-right-radius: 0px;
+      background-size: 800px 100%; } }
+
+@media screen and (max-width: 500px) {
+  .content-login .content-info {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; }
+    .content-login .content-info img {
+      width: 90%; }
+    .content-login .content-info .info-question {
+      width: 45%;
+      padding: 10px; }
+      .content-login .content-info .info-question h2 {
+        font-size: 16px; }
+      .content-login .content-info .info-question p {
+        font-size: 12px; }
+    .content-login .content-info .info-access {
+      width: 45%; }
+  .content-login .content-form-login #msform .page1 {
+    width: 100%; }
+  .my-form-row {
+    width: 100%;
+    flex-wrap: wrap; }
+  .input-70 {
+    width: 100%; }
+  .input-33 {
+    width: 100%; }
+  .input-15 {
+    width: 21.5%; } }
+
+@media screen and (max-width: 449px) {
+  .my-form-row .radio-option {
+    flex-wrap: wrap;
+    justify-content: center; }
+    .my-form-row .radio-option label {
+      padding: 0 8px;
+      cursor: pointer; }
+  .input-15 {
+    width: 100%; } }
 
 .error404 {
   display: flex;
@@ -1687,6 +1740,15 @@ th {
   margin-bottom: 15px;
   font-weight: 600; }
 
+.tab_wrap .tab_content .content-header {
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+  .tab_wrap .tab_content .content-header .avatar-img-profile {
+    margin: 20px auto;
+    height: 13rem;
+    border-radius: 50%; }
+
 .tab_wrap .tab_content .my-form-row input[type="text"],
 .tab_wrap .tab_content .my-form-row input[type="email"],
 .tab_wrap .tab_content .my-form-row input[type="number"],
@@ -1700,11 +1762,6 @@ th {
   font-family: 'Poppins';
   transition: all .1s ease; }
 
-.tab_wrap .tab_content .avatar-img-profile {
-  margin: 20px auto;
-  height: 13rem;
-  border-radius: 50%; }
-
 .tab_wrap .tab_content p {
   font-size: 14px;
   line-height: 22px;
@@ -1715,6 +1772,46 @@ th {
   width: 13rem;
   object-position: center; }
 
+/*
+ ==================================== [ Responsive section profile] ====================================
+*/
+@media screen and (max-width: 1000px) {
+  .content-profile {
+    margin: 2rem; }
+    .content-profile .content-info-perfil {
+      width: 90%; }
+      .content-profile .content-info-perfil .tab_wrap .tab_content form .content-header {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center; }
+        .content-profile .content-info-perfil .tab_wrap .tab_content form .content-header .avatar-img-profile {
+          order: 2; }
+        .content-profile .content-info-perfil .tab_wrap .tab_content form .content-header .custom-file {
+          width: 100%;
+          order: 1; }
+          .content-profile .content-info-perfil .tab_wrap .tab_content form .content-header .custom-file .custom-file-input {
+            width: 100%; } }
+
+@media screen and (max-width: 600px) {
+  .content-profile .content-info-perfil .tab_wrap .tab_content .my-form-row button {
+    width: 100%; }
+  .content-profile .content-info-perfil .tab_wrap .tab_content form .my-form-row {
+    flex-wrap: wrap; }
+    .content-profile .content-info-perfil .tab_wrap .tab_content form .my-form-row .input-50 {
+      width: 100%; }
+    .content-profile .content-info-perfil .tab_wrap .tab_content form .my-form-row .input-25 {
+      width: 46.8%; } }
+
+@media screen and (max-width: 541px) {
+  .content-profile .my-form-row button {
+    width: 100%; }
+  .content-profile .content-info-perfil {
+    width: 100%; }
+    .content-profile .content-info-perfil .tab_wrap .tab_content form .my-form-row .input-25 {
+      width: 100%; } }
+
+/*================================[ END Page Setting account ]================================*/
 /*
  ------------------------[Apartado de curso] ----------------------------
 */
@@ -1729,16 +1826,23 @@ th {
       background: #00F2A6;
       padding: 20px;
       color: white; }
-    .search-curso .section-search .button-tecnology {
-      border: none;
-      background: white;
-      padding: 0.4rem 1.5rem;
-      -webkit-box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.39);
-      -moz-box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.39);
-      box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.39);
-      border-radius: 5px;
-      cursor: pointer;
-      margin: .5rem 0rem .5rem 0; }
+    .search-curso .section-search .content-categories {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      margin: 0; }
+      .search-curso .section-search .content-categories .button-tecnology {
+        width: 100%;
+        display: block;
+        border: none;
+        background: white;
+        padding: 0.4rem 1.5rem;
+        -webkit-box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.39);
+        -moz-box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.39);
+        box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.39);
+        border-radius: 5px;
+        cursor: pointer;
+        margin: .5rem 0 .5rem 0; }
     .search-curso .section-search .button-search-curso {
       border: none;
       background: #FF7D36;
@@ -1811,6 +1915,39 @@ th {
     .card-curso-result .body-curso-result button:hover {
       background: #274875; }
 
+/*=============================== [Responsive search Curso] ===============================*/
+@media screen and (max-width: 1000px) {
+  .search-curso .section-result-cursos .content-card-result .card-curso-result {
+    width: 43%; }
+  .search-curso .width-100 .content-card-result .card-curso-result {
+    width: 42%; } }
+
+@media screen and (max-width: 890px) {
+  .search-curso .section-result-cursos .content-card-result {
+    flex-wrap: wrap; }
+  .search-curso .section-result-cursos .content-card-result .card-curso-result {
+    width: 100%; } }
+
+@media screen and (max-width: 750px) {
+  .search-curso {
+    flex-wrap: wrap; }
+  .search-curso .section-result-cursos {
+    width: 100%; }
+    .search-curso .section-result-cursos .content-card-result .card-curso-result {
+      width: 100%; }
+  .search-curso .section-search {
+    width: 100%; }
+    .search-curso .section-search .content-categories {
+      display: flex;
+      justify-content: center;
+      align-items: center; }
+      .search-curso .section-search .content-categories .button-tecnology {
+        width: 50%; } }
+
+@media screen and (max-width: 600px) {
+  .search-curso .width-100 .content-card-result .card-curso-result {
+    width: 100%; } }
+
 /*
  ------------------------[Fin apartado de curso] ----------------------------
 */
@@ -1877,6 +2014,18 @@ th {
         padding: .8rem 3.5rem;
         cursor: pointer;
         border-radius: 5px; }
+
+/*=============================== [Responsive section pay  Curso] ===============================*/
+@media screen and (max-width: 750px) {
+  .content-purchase {
+    padding: 1.5rem;
+    flex-direction: column; }
+    .content-purchase .content-section-pay {
+      margin: 0;
+      width: 100%; }
+    .content-purchase .resumen-pago {
+      width: 100%;
+      margin: 0; } }
 
 /*
  ------------------------[Fin apartado de pago] ----------------------------
@@ -2000,6 +2149,16 @@ th {
     margin-bottom: 1.5rem; } }
 
 /*=============================[Detail Curso]===========================*/
+.content-video-presentacion {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center; }
+  .content-video-presentacion .fm-video {
+    margin-top: 3rem;
+    width: 45%;
+    border-radius: 8px; }
+
 .content-detail {
   width: 100%;
   height: auto; }
@@ -2014,6 +2173,7 @@ th {
     position: relative;
     margin-bottom: 20rem; }
     .content-detail .sec-info-curso h2 {
+      text-align: center;
       color: white;
       font-size: 30px; }
     .content-detail .sec-info-curso .content-Info-item {
@@ -2135,3 +2295,51 @@ div.panel {
       padding: 12px 20px;
       border-radius: 4px;
       margin-bottom: 10px; }
+
+/*responsive*/
+@media screen and (max-width: 760px) {
+  .content-video-presentacion .fm-video {
+    margin-top: 6rem; } }
+
+@media screen and (max-width: 552px) {
+  .content-video-presentacion .fm-video {
+    width: 100%;
+    margin-top: 9rem;
+    border-radius: 0; }
+  .sec-info-curso .content-Info-item {
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center; }
+  .info-presentacion .cost-curso .content-boton {
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center; }
+    .info-presentacion .cost-curso .content-boton .enlaces-share {
+      margin-top: 1.5rem;
+      width: 100%;
+      text-align: center; } }
+
+@media screen and (max-width: 400px) {
+  .content-video-presentacion .fm-video {
+    margin-top: 2rem; }
+  .content-detail .sec-info-curso {
+    padding: 2rem;
+    margin-bottom: 30rem;
+    height: 500px;
+    background-color: coral; }
+  .content-detail .sect-content-curso .text-learnig-requisites {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; }
+    .content-detail .sect-content-curso .text-learnig-requisites .learning {
+      width: 100%; }
+    .content-detail .sect-content-curso .text-learnig-requisites .requisites {
+      margin-top: 30px;
+      width: 100%; } }
+
+@media screen and (max-width: 362px) {
+  .content-detail .sec-info-curso {
+    height: 620px;
+    margin-bottom: 25rem; } }
+
+/*=============================[Final section Detail Curso]===========================*/

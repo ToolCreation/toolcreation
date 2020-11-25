@@ -33,6 +33,12 @@ switch($operacion){
          $tema->setIdCurso($_POST['IDCURSO']);
          echo $tema->countRegister();
         break;
+        case 'insertTemaVisto':
+            $estudiante = $_POST['estudiante'];
+            $tema->setIdTema($_POST['idTema']);
+            //implmentacio de singleton y MVC
+            echo $tema->insertTemaVisto($estudiante);
+        break;
 }
 
 

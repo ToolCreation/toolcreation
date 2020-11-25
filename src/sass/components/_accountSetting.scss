@@ -81,6 +81,17 @@
 	font-weight: 600;
 }
 .tab_wrap .tab_content{
+	.content-header{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		.avatar-img-profile{
+			margin: 20px auto;
+			// width: 25%;
+			height: 13rem;
+			border-radius: 50%;
+		}
+	}
 	.my-form-row{
 		input[type="text"],
 		input[type="email"],
@@ -96,12 +107,7 @@
 		transition: all .1s ease;
     	}
 	}
-    .avatar-img-profile{
-        margin: 20px auto;
-		// width: 25%;
-		height: 13rem;
-		border-radius: 50%;
-    }
+    
 }
 .tab_wrap .tab_content p{
 	font-size: 14px;
@@ -115,3 +121,79 @@
 	object-position: center ;
 }
 
+/*
+ ==================================== [ Responsive section profile] ====================================
+*/
+@media screen and (max-width: 1000px){
+	.content-profile{
+		margin: 2rem;
+		.content-info-perfil{
+			width: 90%;
+			.tab_wrap .tab_content{
+				form .content-header{
+				
+				 display: flex ;
+				 flex-wrap: wrap;
+				 justify-content: center;
+				 align-items: center;
+					 .avatar-img-profile{
+						order: 2;
+					}
+					.custom-file{
+						width: 100%;
+						order: 1;
+						.custom-file-input{
+							width: 100%;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 600px){
+	.content-profile{
+		.content-info-perfil{
+		
+			.tab_wrap .tab_content{
+				.my-form-row button{
+					width: 100%;
+				}
+				form .my-form-row{
+					flex-wrap: wrap;
+					.input-50{
+						width: 100%;
+					}
+					.input-25{
+						width:46.8%;
+					}
+				}
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 541px){
+	.content-profile{
+		.my-form-row button{
+			width: 100%;
+		}
+		.content-info-perfil{
+			width: 100%;
+			.tab_wrap .tab_content{
+				
+				form .my-form-row{
+					.input-25{
+						width:100%;
+					}
+				}
+			}
+		}
+	}
+}
+
+
+	
+
+/*================================[ END Page Setting account ]================================*/

@@ -19,10 +19,10 @@ session_start();
             <div class="content-logo-principal">      
                 <a href="index.php"><img src="src/img/Logo-ToolCreatiion2.png" width="110" height="70" alt=""></a> 
             </div>
-            <div class="barra-busqueda-principal">
+            <!-- <div class="barra-busqueda-principal">
                 <input type="text" placeholder="Buscar">
                 <button class="btn-search"><i class="fas fa-search"></i></button>
-            </div>
+            </div> -->
 
             <?php require('sections/content-menu.php');?>
             <?php require('sections/dropdown.php'); ?>
@@ -40,21 +40,20 @@ session_start();
                 </div>
                 <h2>Mis Cursos</h2>  
                 <div class="content-card-result">
-                    <div   v-for="curso in myCursosDetail " class=" card-curso-result" style="width: 31%;" >
+                    <div v-for="curso in myCursosDetail " class=" card-curso-result" >
                         <div class="header-curso-result">
                             <img v-bind:src="'src/img/bannerscursos/'+ curso.imagenCurso" alt="">
                         </div>
                         <div class="body-curso-result">
                             <h4>{{curso.nombreCurso}}</h4>
                             <span>{{curso.nameInstructor}}</span> <img v-bind:src="'./src/img/perfilUsers/'+ curso.imgPerfilIntructor"   alt="">
-                            <button type="button" class="btn show-curso">Abrir</button>
+                            <button type="button" class="btn show-curso" @click="aprender(curso.idCurso)">Abrir</button>
                             <div class="container-bar-progress" >
                             <div class="progress-bar" v-bind:style="'width:'+ curso.porcentaje+'%;'"></div>
                             </div><span class="mt-3">{{curso.porcentaje}} %</span>
                         </div> 
                     </div> 
-                </div>
-                
+                </div> 
             </div>
         </section>
             

@@ -32,15 +32,21 @@
                    </div>
             </div>
                 <img v-bind:src="'src/img/bannerscursos/'+curso.imgCurso" alt="" width="200" >
+                
                 <h4 class="subtitle-contenido">Descripcion</h4>
                 <p class="text-detail-curso">
                     {{curso.descripcion}}
                 </p>
-            </div>
-        
+        </div>
     </div>
 
 </section>
+<div class="content-video-presentacion">
+    <video  controls id="fm-video" class="fm-video">
+        <source v-bind:src="'src/videos/cursos/'+curso.videoPresentacion">
+      </video>
+</div>
+
 <section class="sect-content-curso">
   
     <div class="text-learnig-requisites">

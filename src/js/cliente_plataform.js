@@ -163,12 +163,18 @@ const CLIENTE = new Vue({
         let formdata = CLIENTE.toFormData(datos,'accountConfig')
         axios.post(ENDPOINT_LOG_ALUMNO, formdata).then(function (response) {
           console.log(response);
-          if (response.data) {
+          if (response.data == 1) {
             console.log(response.data);
             CLIENTE.alertMessage("myalert alert-correct","Se han actualizado su perfil","fas fa-check bg-correct");
             setTimeout(function () {
                   location.reload();
               }, 2800);
+          } else if (response.data.msj == "errorFile"){
+            CLIENTE.alertMessage(
+              "myalert alert-fail",
+               response.data.detailError,
+              "fas fa-times bg-fail"
+            );
           } else {
               CLIENTE.alertMessage(
               "myalert alert-fail",
@@ -358,6 +364,10 @@ previewImage: function(e){
     let valor = 'idcurso='+id; 
     window.location.href = 'detailcurso.php?'+valor;
   },
+  aprender: function(id){
+    localStorage.setItem('idCursoLearn', id)
+    window.location.href = 'aprendizaje.html';
+  }
   
   
   },

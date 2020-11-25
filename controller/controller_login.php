@@ -8,7 +8,7 @@ require('../model/mvc/model_mvc_login.php');
 //------------------[Creacion de las instancias de los patrones]------------------------
 $login = new MVCLogin();
 // $option = 'autenticacion';
-
+$typeImagFile = (isset($_FILES['imgPerfil']['type'])) ?$_FILES['imgPerfil']['type']: '';
 switch ($option) {
     case 'autenticacion':
             $login->setEmail($_POST['email']);
@@ -135,6 +135,7 @@ switch ($option) {
             $login->setNombre($_REQUEST['nombre']);
             $login->setApaterno($_REQUEST['AP']);
             $login->setAmaterno($_REQUEST['AM']);
+            $login->setTipeFileImg($typeImagFile);
             $login->setFechaNacimiento($_REQUEST['dateOfBirth']);
             $login->setEdad($_REQUEST['edad']);
             $login->setSexo($_REQUEST['sexo']);

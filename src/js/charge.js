@@ -106,7 +106,7 @@ function stripeTokenHandler(token) {
               }, 5000);
             }else{
               ocualtarSpinner();
-              alertNotification("Listo", `${response.data.mensaje}`, "error", 2000)
+              alertNotification("Error", `${response.data.mensaje}`, "error", 2000)
             }    
     });
   }

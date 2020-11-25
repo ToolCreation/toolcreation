@@ -19,17 +19,18 @@
                             <th>Nombre </th>
                             <th>Tema</th>  
                             <th>Tipo </th>
-                            <th>URL</th>
+                            <th>URL / Video</th>
                           </tr>
                          
                         </thead>
+                        
                             <tbody>
                                <tr v-for="(video, index) in listaVideos" v-show="index >=  anteriorVideo && index < siguienteVideo">
                                   <td>{{video.idVideo}}</td>
                                   <td>{{video.nombreVideo}}</td>
                                   <td>{{video.nombreTema}}</td>
                                   <td>{{video.tipoVideo}}</td>
-                                  <td><a v-bind:href="video.URLvideo">{{video.URLvideo}}</a></td>
+                                  <td><a v-bind:href="video.URLvideo" target="_blank">{{video.URLvideo}}</a></td>
                                   <td>
                                     <button  type="button"  class="btn btn-success "  data-toggle="modal" data-target="#updateModalVideo" @click= "setDatosVideo(video)" ><i class="far fa-edit"></i> Editar</button>
                                     <button type="button"  class="btn btn-delete " data-toggle="modal" data-target="#deleteModalVideo" @click= "setDatosDeleteVideo(video)"><i class="fas fa-trash-alt"></i>Eliminar</button>
@@ -99,15 +100,16 @@
                             <div class="form-group col">
                               <p>  <i>Para subir el video, necesita que este tenga una buena calidad de imagen y video,
                                 usted puede editarlos con las herramientas que usted guste. incluso si ustede ya tienes un curso en Youtube u otras plataformas,
-                                puede pegar los urls, solo valla a su plataforma y genere el link del video</i></p>
-                              <!-- <label for="">Seleccione el video</label>
-                              <input class="form-control" type="file" name="" id="insert-video"> -->
+                                puede pegar los urls, solo valla a su plataforma y genere el link del video,  en caso de que no pueda subir un video, si el video es pesado, 
+                                tardara demasiado en cargar</i></p>
+                              <label for="">Seleccione el video</label>
+                              <input class="form-control" type="file" name="" id="insert-video">
                             </div>
                             
                        </div>
                        <div class="row">
                         <div class="form-group col">
-                          <label for="">Pege el url</label>
+                          <label for="">Pege el url </label>
                           <input class="form-control" type="url" name="" id="insert-url">
                         </div>
                        </div>
@@ -165,9 +167,10 @@
                         <div class="form-group col">
                           <p>  <i>Para subir el video, necesita que este tenga una buena calidad de imagen y video,
                               usted puede editarlos con las herramientas que usted guste. incluso si ustede ya tienes un curso en Youtube u otras plataformas,
-                              puede pegar los urls, solo valla a su plataforma y genere el link del video</i></p>
-                          <!-- <label for="">Seleccione el video</label>
-                          <input class="form-control" type="file" name="" id="update-video"> -->
+                              puede pegar los urls, solo valla a su plataforma y genere el link del video, en caso de que no pueda subir un video, si el video es pesado, 
+                            tardara demasiado en cargar</i></p>
+                          <label for="">Seleccione el video</label>
+                          <input class="form-control" type="file" name="" id="update-video">
                         </div>
                       </div>
                       <div class="row">

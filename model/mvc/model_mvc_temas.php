@@ -79,12 +79,18 @@ class MVCTemas{
     }
 
      public function countRegister(){
-            $this->sql = "CALL sp_tema_count('$this->idCurso')";
-            $count = $this->conn->query( $this->sql);
-            $total = mysqli_fetch_array($count);
-            $this->closeConnection();
-            return $total[0];
+         $this->sql = "CALL sp_tema_count('$this->idCurso')";
+         $count = $this->conn->query( $this->sql);
+         $total = mysqli_fetch_array($count);
+         $this->closeConnection();
+         return $total[0];
         
+     }
+     public function insertTemaVisto($estudiante){
+      $this->sql = "CALL sp_temavisto_create('$this->idTema','$estudiante')";
+      $insertar = $this->conn->query( $this->sql);
+      $this->closeConnection();
+      return $insertar;
      }
 
 }

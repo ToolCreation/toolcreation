@@ -3,7 +3,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
+    align-items: center; 
 }
 
 .container-progres-bar{
@@ -15,7 +15,6 @@
 }
 
 .progres-bar{
-    width: 10%;
     height: 5px;
     background-color: #ff9368;
     border-radius: 20px;
@@ -36,7 +35,7 @@
 
 nav {
     background-color: #fff ;
-    height: 100%;
+    height: 100vh;
     position: fixed;
     right: -300px;
     top: 20;
@@ -45,45 +44,32 @@ nav {
     -webkit-transition: right 0.2s linear;
     transition: right 0.2s linear;
     width: 300px;
-    z-index: 9000;
+    z-index: 9003;
     /* IT'S OVER 9000! */
     -webkit-box-shadow: 0px 4px 35px 0px rgba(0,0,0,0.13);
     -moz-box-shadow: 0px 4px 35px 0px rgba(0,0,0,0.13);
     box-shadow: 0px 4px 35px 0px rgba(0,0,0,0.13);
   }
-  nav #menuToggle {
+   #menuToggle {
     font-family: 'Poppins';
-    background: #1d3557;
+    background: #343a40;
     display: block;
     position: relative;
-    height: 50px;
-    left: -50px;
-    top: 0px;
-    width: 50px;
+    padding: 8px 15px;
+    /* left: -50px; */
     border: none;
-    overflow: hidden;
     color: white; transition: all .3s ease;
   }
-  nav #menuToggle .fas {
+  #menuToggle .fas {
       color: white;
-      margin-top: 18px;
       margin-right: 5px;
-      margin-bottom: 20px;
+ 
+  } 
+  #menuToggle:hover{
+    border-radius: 20px;
+    background: #ff9368;
   }
-  nav #menuToggle:hover{
-      width:180px;
-      overflow: none;
-      left: -180px;
-  }
-  nav #menuToggle span {
-    background: white;
-    display: block;
-    height: 10%;
-    left: 10%;
-    position: absolute;
-    top: 45%;
-    width: 80%;
-  }
+  
   .header-sidebar{
       display: flex;
       justify-content: space-between;
@@ -116,45 +102,98 @@ nav {
       padding: 10px 15px;
       border-radius: 8px;
   }
-  /* nav #menuToggle span:before, nav #menuToggle span:after {
-    background: white;
-    content: "";
-    display: block;
-    height: 100%;
-    position: absolute;
-    top: -250%;
-    -moz-transform: rotate(0deg);
-    -ms-transform: rotate(0deg);
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-    width: 100%;
-  }
-  nav #menuToggle span:after {
-    top: 250%;
-  }
-   */
-  /* nav a:nth-child(n + 2) {
-    color: white;
-    display: block;
-    font-size: 2.5em;
-    margin: 30px 0 30px 30px;
-  }
-  nav a:nth-child(n + 2):after {
-    background: #ffa53e;
-    content: "";
-    display: block;
-    height: 2px;
-    -moz-transition: width 0.2s;
-    -o-transition: width 0.2s;
-    -webkit-transition: width 0.2s;
-    transition: width 0.2s;
-    width: 0;
-  }
-  nav a:nth-child(n + 2):hover:after {
-    width: 100%;
-  } */
 
+  .fm-video{
+    width: 100%;
+    box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.5);
+  }
   .open {
     right: 0;
   }
- 
+  .recursos-curso{
+    padding: 2rem;
+  }
+  .content-card{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .card-recurso{
+    margin-left: 25px;
+    margin-bottom: 20px;
+    width: 30%;
+    padding: 20px;
+    -webkit-box-shadow: 0px 4px 35px 0px rgba(0,0,0,0.13);
+    -moz-box-shadow: 0px 4px 35px 0px rgba(0,0,0,0.13);
+    box-shadow: 0px 4px 35px 0px rgba(0,0,0,0.13);
+    text-align: center;
+  }
+
+  .card-recurso p{
+    font-weight: bold;
+  }
+  .card-recurso a{
+    text-decoration: none;
+    padding: 8px 15px;
+    transition: all .3s ease;
+    color: black;
+    text-align: center;
+    border-radius: 20px;
+  }
+  .card-recurso a:hover{
+   
+    background: #ae51ff;
+    color: white;
+  }
+  /*=============================[Estilos para el sidebar]==============================*/
+  @media screen 
+  and (min-device-width: 1200px) { 
+    .item-nav-2{
+      width: 35%;
+    }
+  }
+
+  @media screen 
+  and (max-width: 700px) { 
+    .card-recurso{
+      width: 45%;
+    }
+  }
+
+  @media screen 
+  and (max-width: 530px) { 
+    .container-nav-learn{
+      flex-wrap: wrap;
+    }
+    .card-recurso{
+      width: 100%;
+    }
+    .item-nav-1{
+      order: 2;
+    }
+    .item-nav-2{
+      width: 100%;
+      order: 1;
+    }
+    .item-nav-3{
+      order:3 ;
+    }
+  }
+
+  @media screen 
+  and (max-width: 340px) {  
+    .item-nav-1{
+      width: 100%;
+      text-align: center;
+    }
+    .item-nav-3{
+    display: flex;
+      width: 100%;
+      justify-content: center;
+    }
+    nav{
+      width: 100%;
+      right: -400px;
+    }
+   }

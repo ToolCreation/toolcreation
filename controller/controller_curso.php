@@ -5,6 +5,13 @@ require('../model/mvc/conexion.php');
 require('../model/mvc/model_mvc_cursos.php');
 
 //------------------[Creacion de las instancias de los patrones]------------------------
+$typoImg = (isset($_FILES['imgCurso']['type']))? $_FILES['imgCurso']['type']: '';
+$nombreImg = (isset($_FILES['imgCurso']['name']))? $_FILES['imgCurso']['name']: '';
+$rutaActualImg = (isset($_FILES['imgCurso']['tmp_name']))? $_FILES['imgCurso']['tmp_name']: '';
+$typoVideo = (isset($_FILES['video']['type']))? $_FILES['video']['type']: '';
+$nombreVideo = (isset($_FILES['video']['name']))? $_FILES['video']['name']: '';
+$rutaActualVideo = (isset($_FILES['video']['tmp_name']))? $_FILES['video']['tmp_name']: '';
+
 $curso = new MVCCurso();
 switch($option){
     case 'insert':
@@ -12,8 +19,12 @@ switch($option){
         $curso->setConocimiento($_POST['conocimiento']);
         $curso->setRequistos($_POST['requisitos']);
         $curso->setDescripcion($_POST['descripcion']);
-        $curso->setImagenCurso($_FILES['imgCurso']['name']);
-        $curso->setRutaActualImagen($_FILES['imgCurso']['tmp_name']);
+        $curso->setTipoImagen($typoImg);
+        $curso->setImagenCurso($nombreImg );
+        $curso->setRutaActualImagen($rutaActualImg);
+        $curso->setTipoVideo($typoVideo);
+        $curso->setVideoPrueba( $nombreVideo);
+        $curso->setRutaVideoActual($rutaActualVideo);
         $curso->setCategoria($_POST['categoria']);
         $curso->setNivel($_POST['nivel']);
         $curso->setPrecio($_POST['precio']);
@@ -22,18 +33,23 @@ switch($option){
         echo $curso->insertData(); 
     break;
     case 'update':
+       
         $curso->setId($_POST['idCurso']);
         $curso->setNombre($_POST['nombre']);
         $curso->setConocimiento($_POST['conocimiento']);
         $curso->setRequistos($_POST['requisitos']);
         $curso->setDescripcion($_POST['descripcion']);
-        $curso->setImagenCurso($_FILES['imgCurso']['name']);
-        $curso->setRutaActualImagen($_FILES['imgCurso']['tmp_name']);
+        $curso->setTipoImagen($typoImg);
+        $curso->setImagenCurso($nombreImg);
+        $curso->setRutaActualImagen($rutaActualImg);
+        $curso->setTipoVideo($typoVideo);
+        $curso->setVideoPrueba( $nombreVideo);
+        $curso->setRutaVideoActual($rutaActualVideo);
         $curso->setCategoria($_POST['categoria']);
         $curso->setNivel($_POST['nivel']);
         $curso->setPrecio($_POST['precio']);
         $curso->setMoneda($_POST['moneda']);
-        $curso->updateData();
+        echo $curso->updateData();
     break;
     case 'delete':
         $curso->setId($_POST['idCurso']);
@@ -62,5 +78,12 @@ switch($option){
         $curso->setId($_POST['IDCURSO']);
         echo $curso->cursoDeatail();
     break;
+    case 'porcentajeCurso':
+        $estudiante = $_POST['estudiante'];
+        $curso->setId($_POST['IDCURSO']);
+        echo $curso->obtenerPorcentaje($estudiante);
+    break;
+    
+    
 }
 

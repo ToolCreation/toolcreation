@@ -23,7 +23,9 @@ const CLIENTE = new Vue({
   mounted: function() {
     this.comprobarLogeo();
     this.cargarCursoDetail();
-    this.loadStatusVentaCurso()
+    if(this.logeado){
+      this.loadStatusVentaCurso()
+    }
     this.loadTemas();
 
  },

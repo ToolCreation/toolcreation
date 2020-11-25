@@ -23,21 +23,21 @@
                         <p>{{messagealert}}</p>
                         <i v-bind:class="alerticon"></i>
                 </div>
-            </div>
+        </div>
+
         <div class="content-info-perfil">
-    
             <div class="tab_wrap" style="display: block;">
                 <div class="title">Información personal</div>
                 <div class="tab_content">
                     <form action="" enctype="multipart/form-data">
-                        <div class="my-form-row">
+                        <div class="content-header">
                             
                             <img :src="imgAccount" class="cover avatar-img-profile" alt="" id="imageProfile">
                             <div class="custom-file">
-                                <input  type="file" accept="image/*" class="custom-file-input" id="customFile" @change="previewImage">
+                                <input  type="file" accept="image/*" class="custom-file-input input-email" id="customFile" @change="previewImage">
                                 <!-- <img v-if="urlUpd" :src="urlUpd" alt="" width="200" class="mx-auto d-block m-1 img-user" > -->
                                 <!-- <label class="custom-file-label" for="customFile">Seleccione archivo</label> -->
-                              </div>
+                            </div>
                         </div> 
                         <div class="my-form-row" >
                                 <input class="input-100 " type="text" placeholder="Nombre" value="<?php echo $_SESSION['nombre'] ?> " name="" id="insert-nombre">

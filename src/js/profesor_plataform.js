@@ -119,12 +119,18 @@ const CLOSE = new Vue({
               axios.post(ENDPOINT_LOG_ALUMNO, formdata).then(function (response) {
                 console.log(response);
                 if (response.data) {
-                  console.log(response.data);
+                  console.log(response.data == 1);
                   CLOSE.alertMessage("myalert alert-correct","Se han actualizado su perfil","fas fa-check bg-correct");
                   sessionStorage.setItem('imagen', img.name)
                   setTimeout(function () {
                         location.reload();
                     }, 2800);
+                }else if (response.data.msj == "errorFile"){
+                  CLIENTE.alertMessage(
+                    "myalert alert-fail",
+                     response.data.detailError,
+                    "fas fa-times bg-fail"
+                  );
                 } else {
                     CLOSE.alertMessage(
                     "myalert alert-fail",

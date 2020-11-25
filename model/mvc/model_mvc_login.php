@@ -25,6 +25,7 @@ class MVCLogin {
     private $imagen;
     private $rutaActual;
     private $idUsuario;
+    private $tipeFileImg;
    
 
     //metodos de acceso a propiedades
@@ -60,11 +61,8 @@ class MVCLogin {
     public function getImagen() { return $this->imagen; }
     public function setRutaActual($value) { $this->rutaActual = $value; }
     public function getRutaActual() { return $this->rutaActual; }
-
-
-    // public function setLogeo($value) { $this->logeo = $value; }
-    // public function getLogeo() { return $this->logeo; }
-    
+    public function getTipeFileImg(){ return $this->tipeFileImg; }
+    public function setTipeFileImg($tipeFileImg){$this->tipeFileImg = $tipeFileImg; }
 
     public function __construct(){
         $this->startDB();
@@ -141,23 +139,32 @@ class MVCLogin {
     public function ConfigPersonalAccount(){
         session_start();
         if($this->imagen != null){
-                $this->sql = "CALL sp_configpersonalaccountImage('$this->nombre', '$this->APaterno', '$this->AMaterno',
-                                                                 '$this->fechaNacimiento', '$this->edad','$this->sexo',
-                                                                  '$this->telefono', '$this->imagen', '$this->idUsuario') ";
-                $update = $this->conn->query($this->sql);
-                $ruta = "../src/img/perfilUsers/".$this->imagen;
-                    if($update){
-                        move_uploaded_file($this->rutaActual,$ruta);
-                        $_SESSION['nombre']        = $this->nombre;
-                        $_SESSION['APaterno']      = $this->APaterno;
-                        $_SESSION['AMaterno']      = $this->AMaterno;
-                        $_SESSION['FNacimiento']   = $this->fechaNacimiento;
-                        $_SESSION['edad']          = $this->edad;
-                        $_SESSION['sexo']          = $this->sexo;
-                        $_SESSION['imagen']        = $this->imagen;
-                        $_SESSION['telefono']      = $this->telefono;
-                    }
-                 return $update;
+                if( ($this->tipeFileImg =='image/jpeg') ||
+                ($this->tipeFileImg =='image/png') || 
+                ($this->tipeFileImg =='image/jpg') 
+                ){
+                    $this->sql = "CALL sp_configpersonalaccountImage('$this->nombre', '$this->APaterno', '$this->AMaterno',
+                                                                    '$this->fechaNacimiento', '$this->edad','$this->sexo',
+                                                                    '$this->telefono', '$this->imagen', '$this->idUsuario') ";
+                    $update = $this->conn->query($this->sql);
+                    $ruta = "../src/img/perfilUsers/".$this->imagen;
+                        if($update){
+                            move_uploaded_file($this->rutaActual,$ruta);
+                            $_SESSION['nombre']        = $this->nombre;
+                            $_SESSION['APaterno']      = $this->APaterno;
+                            $_SESSION['AMaterno']      = $this->AMaterno;
+                            $_SESSION['FNacimiento']   = $this->fechaNacimiento;
+                            $_SESSION['edad']          = $this->edad;
+                            $_SESSION['sexo']          = $this->sexo;
+                            $_SESSION['imagen']        = $this->imagen;
+                            $_SESSION['telefono']      = $this->telefono;
+                        }
+                }else{
+                    $titleMessage = array("msj"=>"errorFile", 
+                    "detailError"=>"el archivo no es valido, ingrese una imagen JPG, JPEG, PNG");
+                    return json_encode($titleMessage);
+                }
+                 
             }else{
                 $this->sql = "CALL sp_configpersonalacountNotimage('$this->nombre', '$this->APaterno', '$this->AMaterno', 
                                                                       '$this->fechaNacimiento', '$this->edad','$this->sexo',
@@ -173,9 +180,9 @@ class MVCLogin {
                     $_SESSION['telefono']      = $this->telefono;
                 }
                 
-                return $update;
+             
        }
-      
+       return $update;
    }
 
     public function configLogAccount(){
@@ -240,6 +247,9 @@ class MVCLogin {
         $updatePass = $this->conn->query($this->sql);
         return $updatePass;
     }
+   
+
+    
    
 }
  

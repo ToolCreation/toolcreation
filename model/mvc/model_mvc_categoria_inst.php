@@ -88,7 +88,7 @@ class  MVCCategoriaInstructor  {
         $this->sql = "SELECT count(*) FROM TblCategoriaInstructor";
         $count = $this->conn->query($this->sql);
         $total = mysqli_fetch_array($count);
-       $this->closeConnection();
+        $this->closeConnection();
         return $total[0];
     }
 }

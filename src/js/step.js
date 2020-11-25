@@ -16,7 +16,7 @@ let btnNext = document.querySelector(".btn-next");
       page1.classList.remove('active')
       page2.classList.remove('hide');
       page2.classList.add('active');
-      contentForm.style.width = "155%";
+      contentForm.style.width = "100%";
       page1.classList.add("hide")
      
   });

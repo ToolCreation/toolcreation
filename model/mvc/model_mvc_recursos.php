@@ -99,10 +99,5 @@ class MVCRecursos
 
        return $json_string;
     }
-
-
-   
-
-
-    
+  
 }

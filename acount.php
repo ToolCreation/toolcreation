@@ -21,10 +21,10 @@ session_start();
         <div class="content-logo-principal">      
             <img src="src/img/Logo-ToolCreatiion2.png" width="110" height="70" alt="">
         </div>
-        <div class="barra-busqueda-principal">
+        <!-- <div class="barra-busqueda-principal">
             <input type="text" placeholder="Buscar">
             <button class="btn-search"><i class="fas fa-search"></i></button>
-        </div>
+        </div> -->
 
         <?php require('sections/content-menu.php');?>
         <?php require('sections/dropdown.php'); ?>

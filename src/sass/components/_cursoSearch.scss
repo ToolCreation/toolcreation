@@ -17,7 +17,14 @@
         padding: 20px;
         color: white;
        }
+       .content-categories{
+           width: 100%;
+           display: flex;
+           flex-wrap: wrap;
+           margin: 0;
         .button-tecnology{
+            width: 100%;
+            display: block;
             border: none;
             background: white;
             padding: 0.4rem 1.5rem;
@@ -26,9 +33,11 @@
             box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.39);
             border-radius: 5px;
             cursor: pointer;
-            margin: .5rem 0rem .5rem 0;
+            margin: .5rem 0 .5rem 0;
             
         }
+       }
+       
         .button-search-curso{
             border: none;
             background: #FF7D36;
@@ -124,8 +133,63 @@
        }
     }      
 }
+/*=============================== [Responsive search Curso] ===============================*/
+@media screen and (max-width: 1000px){
+    .search-curso .section-result-cursos .content-card-result .card-curso-result{
+       width: 43%; 
+    }
+    .search-curso .width-100 .content-card-result{
+        .card-curso-result{
+            width: 42%;
+        }
+    } 
+}
 
+@media screen and (max-width: 890px){
+    .search-curso .section-result-cursos .content-card-result{
+       flex-wrap: wrap; 
+    }
+    .search-curso .section-result-cursos .content-card-result .card-curso-result{
+       width: 100%;
 
+     }
+}
+
+@media screen and (max-width: 750px){
+    .search-curso{
+        flex-wrap: wrap;
+    }
+    .search-curso .section-result-cursos {
+        width: 100%;
+        .content-card-result{
+            
+            .card-curso-result{
+                width: 100%;
+            }
+        }
+    }
+    .search-curso  .section-search {
+       width: 100%;
+        .content-categories{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .button-tecnology{
+                width: 50%;
+                // margin-right: 1rem;
+
+            }
+        }
+     }
+}
+
+@media screen and (max-width: 600px){ 
+    .search-curso .width-100 .content-card-result{
+        .card-curso-result{
+            width: 100%;
+        }
+    } 
+}
 /*
  ------------------------[Fin apartado de curso] ----------------------------
 */
@@ -206,6 +270,25 @@
         }
     }
 }
+
+/*=============================== [Responsive section pay  Curso] ===============================*/
+
+@media screen and (max-width: 750px){ 
+    .content-purchase{
+        padding: 1.5rem;
+        flex-direction: column;
+        .content-section-pay{
+            margin: 0;
+            width: 100%;
+        }
+
+        .resumen-pago{
+            width: 100%;
+            margin: 0;
+        }
+    }
+}
+
 
 
 /*

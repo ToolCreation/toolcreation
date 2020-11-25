@@ -5,6 +5,8 @@ const ENPOINT_GENERADOR_COMBOS =  "../../controller/controller_data_combos.php";
 //CURSOS.alertMessage("myalert alert-correct","Se ha eliminado el estado exitosamente","fas fa-check bg-correct")
 //CURSOS.alertMessage("myalert alert-fail","El estado no pudo eliminarce" + response.data, "fas fa-times bg-fail");
 //CURSOS.iconRfresh = "fas fa-redo-alt fa-spin fa-2x";
+var contentLoad = document.querySelector(".content-spinner");
+var spinner = document.getElementById("spinner");
 var d = document;
 const CURSOS = new Vue({
     el:"#contenedor",
@@ -39,7 +41,7 @@ const CURSOS = new Vue({
             let combos = new FormData();
             combos.append('option','instanciarNivel')
                 axios.post(ENPOINT_GENERADOR_COMBOS, combos).then(function (response) {
-                    console.log(response);
+                    // console.log(response);
                     CURSOS.comboNivel = response.data.estadoNivel;
             })
         },
@@ -47,7 +49,7 @@ const CURSOS = new Vue({
             let combos = new FormData();
             combos.append('option','instanciarCategoria')
             axios.post(ENPOINT_GENERADOR_COMBOS, combos).then(function (response) {
-                   console.log(response);
+                //    console.log(response);
                    CURSOS.comboCategoria = response.data.categoria;
             })
            
@@ -57,7 +59,7 @@ const CURSOS = new Vue({
             let combos = new FormData();
             combos.append('option','instanciarMoneda')
                 axios.post(ENPOINT_GENERADOR_COMBOS, combos).then(function (response) {
-                    console.log(response);
+                    // console.log(response);
                     CURSOS.comboMoneda = response.data.moneda;
             })
            
@@ -67,13 +69,16 @@ const CURSOS = new Vue({
             data.append('option','showData')
             data.append('idProfesor', d.getElementById('idProfesor').value)
                 axios.post(ENDPOINT_CURSOS, data).then(function (response) {
-                    console.log(response);
+                    // console.log(response);
                     CURSOS.listCursos = response.data.curso;
             })
         },
         insertar: function (){
           let verifySelectedImg = document.getElementById("customFile").value;
           let getImgCurso = document.getElementById("customFile").files[0]
+          let verifySelectedVideo = document.getElementById("customFileVideo-insert").value;
+          let getVideo = document.getElementById("customFileVideo-insert").files[0];
+
           let datos= {
               nombre : d.getElementById('insert-nombre').value,
               conocimiento : d.getElementById('insert-conocimiento').value,
@@ -85,14 +90,16 @@ const CURSOS = new Vue({
               moneda : d.getElementById('combo-moneda').value,
               instructor: d.getElementById('idProfesor').value,
               imgCurso : getImgCurso,
+              video: getVideo
           }
+
+        //  console.log(datos.video); 
           if(CURSOS.validarCamposInsert(datos)){
             CURSOS.alertMessage("myalert alert-infoDanger","Existen campos vacios","fas fa-exclamation bg-infoDanger"); 
-          }else if(CURSOS.validarImgSelected(verifySelectedImg)){
-                CURSOS.alertMessage("myalert alert-infoDanger","Seleccione una imagen","fas fa-exclamation bg-infoDanger");
-          }else if(CURSOS.validarTypeImagen(getImgCurso)){
-            CURSOS.alertMessage("myalert alert-infoDanger","Seleccione una imagen valida JPG, PNG, JPEG","fas fa-exclamation bg-infoDanger");
+          }else if(CURSOS.validarImgSelected(verifySelectedImg, verifySelectedVideo)){
+                CURSOS.alertMessage("myalert alert-infoDanger","Seleccione una imagen o video","fas fa-exclamation bg-infoDanger");
           }else{
+              CURSOS.mostrarSpinner();
               let formdata = CURSOS.toFormData(datos, 'insert');
               axios.post(ENDPOINT_CURSOS, formdata).then(function (response) {
                 console.log(response);
@@ -101,10 +108,15 @@ const CURSOS = new Vue({
                     CURSOS.limpiarCampos();
                     CURSOS.alertMessage("myalert alert-correct","El curso se ha registrado exitosamente","fas fa-check bg-correct")
                     CURSOS.cargarCursos();
+                    CURSOS.ocualtarSpinner();
                     setTimeout(function() {
                        CURSOS.limpiarAlertas();     
                     },3000);
+                }else if(response.data.msj == "errorFile"){
+                    CURSOS.ocualtarSpinner();
+                    CURSOS.alertMessage("myalert alert-infoDanger",response.data.detailError,"fas fa-exclamation bg-infoDanger"); 
                 }else{
+                    CURSOS.ocualtarSpinner();
                     CURSOS.alertMessage("myalert alert-fail","El curso no pudo registrarce " + response.data, "fas fa-times bg-fail");
                 }
               })
@@ -113,6 +125,7 @@ const CURSOS = new Vue({
         update: function(){
             // let verifySelectedImg = document.getElementById("customFile-update").value;
             let getImgCurso = document.getElementById("customFile-update").files[0]
+            let getVideo = document.getElementById("customFileVideo-update").files[0];
             let datos= {
                 idCurso: d.getElementById('update-idcurso').value,
                 nombre : d.getElementById('update-nombre').value,
@@ -124,24 +137,36 @@ const CURSOS = new Vue({
                 precio : d.getElementById('update-precio').value,
                 moneda : d.getElementById('update-combo-moneda').value,
                 imgCurso : getImgCurso,
+                video: getVideo
             }
+            console.log(getImgCurso);
+            console.log(getVideo);
             if(CURSOS.validarCamposInsert(datos)){
               CURSOS.alertMessage("myalert alert-infoDanger","Existen campos vacios","fas fa-exclamation bg-infoDanger"); 
             }else{
+                CURSOS.mostrarSpinner
                 let formdata = CURSOS.toFormData(datos, 'update');
                 axios.post(ENDPOINT_CURSOS, formdata).then(function (response) {
                   console.log(response);
-                  if(response.data){
+                  if(response.data == "1"){
                       console.log(response.data)
                       CURSOS.limpiarCampos();
                       CURSOS.alertMessage("myalert alert-correct","El curso se ha actualizado exitosamente","fas fa-check bg-correct")
                       CURSOS.cargarCursos();
+                      CURSOS.ocualtarSpinner();
                       setTimeout(function() {
                          CURSOS.limpiarAlertas();     
                       },3000);
+                  }else if(response.data.msj == "errorFile"){
+                        CURSOS.ocualtarSpinner();
+                        CURSOS.alertMessage("myalert alert-infoDanger",response.data.detailError,"fas fa-exclamation bg-infoDanger"); 
                   }else{
                       CURSOS.alertMessage("myalert alert-fail","El curso no pudo actualizarce " + response.data, "fas fa-times bg-fail");
-                  }
+                      CURSOS.ocualtarSpinner();
+                      setTimeout(function() {
+                        CURSOS.limpiarAlertas();     
+                     },3000);
+                    }
                 })
             }
         },
@@ -277,10 +302,18 @@ const CURSOS = new Vue({
                  d.getElementById('combo-moneda').value ="",
                  CURSOS.imgAccount = "";
         },
+        mostrarSpinner:function () {
+            contentLoad.removeAttribute("hidden");
+            spinner.removeAttribute("hidden");
+        },
+          ocualtarSpinner:  function () {
+            contentLoad.setAttribute("hidden", "");
+            spinner.setAttribute("hidden", "");
+        },
         previewImage: function(e){
             CURSOS.imgInfo  = document.getElementById("customFile").files[0];
            console.log(CURSOS.imgInfo )
-           if( CURSOS.imgInfo.type == "image/jpeg" ||  CURSOS.imgInfo.type == "image/png" ||  CURSOS.imgInfo.type == "image/jpg"){
+           if( CURSOS.imgInfo.type == "image/jpeg" ||  CURSOS.imgInfo.type == "image/svg+xml" || CURSOS.imgInfo.type == "image/png" ||  CURSOS.imgInfo.type == "image/jpg"){
                let filereader = new FileReader();
                filereader.readAsDataURL(e.target.files[0])
                filereader.onload = (e) => {
@@ -291,10 +324,11 @@ const CURSOS = new Vue({
             CURSOS.imgAccount = '../../src/img/noImagen.svg';
            }
         },
+      
         previewImageUpdate: function(e){
             let imgInfo  = document.getElementById("customFile-update").files[0];
             console.log(imgInfo )
-            if( imgInfo.type == "image/jpeg" ||  imgInfo.type == "image/png" || imgInfo.type == "image/jpg"){
+            if( imgInfo.type == "image/jpeg" || imgInfo.type == "image/svg+xml" || imgInfo.type == "image/png" || imgInfo.type == "image/jpg"){
                let filereader = new FileReader();
                filereader.readAsDataURL(e.target.files[0])
                filereader.onload = (e) => {
@@ -312,15 +346,21 @@ const CURSOS = new Vue({
             }
             return false;
         },
-        validarTypeImagen: function(imagen ){
-            if(imagen.type == "image/jpeg" ||  imagen.type=="image/png" ||  imagen.type == "image/jpg"){
-                return false;
-            }
-            return true;
-        },
-        validarImgSelected: function(imgSelected){
-            if(imgSelected == ""  ){
-                return 'true';
+        // validarTypeImagen: function(imagen ){
+        //     if(imagen.type == "image/jpeg" ||  imagen.type=="image/png" ||  imagen.type == "image/jpg" || imagen.type =="image/svg+xml"){
+        //         return false;
+        //     }
+        //     return true;
+        // },
+        // validarTypeVideo: function(video ){
+        //     if(video.type == "video/mp4" ||  video.type=="video/webm" ||  video.type == "video/ogg"){
+        //         return false;
+        //     }
+        //     return true;
+        // },
+        validarImgSelected: function(imgSelected, video){
+            if(imgSelected == "" || video == "" ){
+                return true;
             }
             return false
         },
