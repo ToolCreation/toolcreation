@@ -83,6 +83,12 @@ switch($option){
         $curso->setId($_POST['IDCURSO']);
         echo $curso->obtenerPorcentaje($estudiante);
     break;
+    case 'verificarPropietario':
+        $usuario = $_POST['usuario'];
+        $curso->setId($_POST['curso']);
+        echo $curso->verificarPropietario($usuario);
+    break;
+
     
     
 }

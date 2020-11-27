@@ -38,7 +38,7 @@ if(!empty($_POST['stripeToken'])){
       $pay->setMoneda($chargeJson['currency']);
       $mensaje = $pay->realizar();
     }else{
-      $mensaje = "Su pago falló";
+      $mensaje = "Su pago falló".$chargeJson['status'];
     }
   }else{
     $mensaje = "Ha ocurrido un error con la transaccion, cumuniquese con sus banco";

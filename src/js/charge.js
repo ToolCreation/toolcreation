@@ -106,7 +106,7 @@ function stripeTokenHandler(token) {
               }, 5000);
             }else{
               ocualtarSpinner();
-              alertNotification("Error", `${response.data.mensaje}`, "error", 2000)
+              alertNotification("Error", `Fallo en su pago ${response.data.mensaje}`, "error", 2000)
             }    
     });
   }

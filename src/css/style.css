@@ -86,13 +86,14 @@ a:hover {
   .header-principal .content-logo-principal {
     padding: 0 10px; }
   .header-principal .content-menu.active {
+    right: 0;
     display: block; }
   .header-principal .content-menu {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
-    transition: all 0.3s ease; }
+    transition: right 0.2s linear; }
     .header-principal .content-menu .menu_close {
       display: none; }
     .header-principal .content-menu .option-menu {
@@ -648,9 +649,9 @@ footer {
       align-items: center;
       position: fixed;
       top: 0;
-      right: 0;
+      right: -400px;
       width: 50%;
-      height: 50%;
+      height: 100vh;
       z-index: 99;
       display: none;
       overflow-y: auto;
@@ -694,6 +695,12 @@ footer {
 @media (max-width: 650px) {
   .header-principal .btn-menu-principal {
     margin-left: 35px; } }
+
+@media (max-width: 400px) {
+  .header-principal .content-menu {
+    width: 100%; }
+  .welcome-principal .explore {
+    font-size: 12px; } }
 
 .contenedor {
   width: 100%;

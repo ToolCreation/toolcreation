@@ -56,7 +56,11 @@ class MVCCurso {
 	public function getImagenCurso(){return $this->imagenCurso;}
 	public function setImagenCurso($imagenCurso){$this->imagenCurso = $imagenCurso;}
 	public function getRutaActualImagen(){return $this->rutaActualImagen;}
-	public function setRutaActualImagen($rutaActualImagen){$this->rutaActualImagen = $rutaActualImagen;}
+    public function setRutaActualImagen($rutaActualImagen){$this->rutaActualImagen = $rutaActualImagen;}
+    public function getTipoImagen(){return $this->tipoImagen;}
+    public function setTipoImagen($tipoImagen){   $this->tipoImagen = $tipoImagen;  }
+    public function getTipoVideo() {return $this->archivoVideo; }
+    public function setTipoVideo($tipoVideo){$this->tipoVideo = $tipoVideo;}
 
     public function __construct(){
         $this->startDB();
@@ -305,26 +309,14 @@ class MVCCurso {
         return $porcentaje[0];
      }
 
-   
-    public function getTipoImagen()
-    {
-        return $this->tipoImagen;
-    }
-
-    public function setTipoImagen($tipoImagen)
-    {
-        $this->tipoImagen = $tipoImagen;
-    }
-
-     
-    public function getTipoVideo()
-    {
-        return $this->archivoVideo;
-    }
+     public function verificarPropietario($usuario){
+        $this->sql = "SELECT fn_verificarSiEsSuCurso('$this->idCurso', '$usuario') AS esPropietario";
+        $vericando = $this->conn->query($this->sql);
+        $propietario = mysqli_fetch_array($vericando);
+        $this->closeConnection();
+        return $propietario[0];
+     }
 
    
-    public function setTipoVideo($tipoVideo)
-    {
-        $this->tipoVideo = $tipoVideo;
-    }
+   
  }

@@ -22,9 +22,10 @@
     <div class="info-presentacion">
         <div class="cost-curso">
             <div class="content-boton">
-                    <button  v-if="statusVentaCurso == 'NO COMPRADO'" type="button" class="btn-incribirte" @click="gotoPay(curso)">Incriberte ahora</button>
-                    <button v-if="statusVentaCurso == 'COMPRADO'" type="button" class="btn-incribirte" @click="gotoMyCurse()">Seguir Aprendiendo</button>
-        
+                    <button  v-if="statusVentaCurso == 'NO COMPRADO' && propietarioCurso =='NO'" type="button" class="btn-incribirte" @click="gotoPay(curso)">Incriberte ahora</button>
+                    <button v-if="statusVentaCurso == 'COMPRADO' && propietarioCurso =='NO'" type="button" class="btn-incribirte" @click="gotoMyCurse()">Seguir Aprendiendo</button>
+                    <a v-if="!logeado" href="public/login.html" class="btn-incribirte"> Inicia sesion para comprar</a>
+                    <a v-if="logeado && propietarioCurso == 'SI' " href="acount.php" class="btn-incribirte">Administra tu curso</a>
                     <p> {{curso.precio}} {{curso.moneda}}</p>
                     <div class="enlaces-share">
                         <a href="#"><i class="far fa-heart"></i> Agregar</a>

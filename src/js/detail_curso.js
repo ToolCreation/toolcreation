@@ -1,6 +1,7 @@
 const ENDPOINT_LOG_ALUMNO   = "controller/controller_login.php";
 const ENDPOINT_CURSOS = "controller/controller_data_combos.php";
 const ENDPOINT_VENTAS = "controller/controller_ventas.php";
+const CURSO ="controller/controller_curso.php";
 var d = document;
 
 //CLIENTE.alertMessage("myalert alert-infoDanger","Archivo no valido","fas fa-exclamation bg-infoDanger");
@@ -18,13 +19,15 @@ const CLIENTE = new Vue({
     curdoDetailList: [],
     temasList: [],
     title: "Hola",
-    statusVentaCurso :''
+    statusVentaCurso :'',
+    propietarioCurso: ''
   },
   mounted: function() {
     this.comprobarLogeo();
     this.cargarCursoDetail();
     if(this.logeado){
       this.loadStatusVentaCurso()
+      this.veridicarPropietarioCurso();
     }
     this.loadTemas();
 
@@ -72,6 +75,17 @@ const CLIENTE = new Vue({
       axios.post(ENDPOINT_VENTAS, getData).then(function (response) {
         console.log(response);
         CLIENTE.statusVentaCurso = response.data;
+      }) 
+    },
+    veridicarPropietarioCurso: function(){
+      let getData = new FormData();
+      getData.append('option','verificarPropietario')
+      getData.append('curso',d.getElementById("idCurso-detail").value);
+      getData.append('usuario', sessionStorage.getItem('usuario'));
+      axios.post(CURSO, getData).then(function (response) {
+        console.info('verificar si el curso pertenece al usuario');
+        console.log(response);
+        CLIENTE.propietarioCurso = response.data;
       }) 
     },
     
