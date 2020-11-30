@@ -121,9 +121,7 @@ class MVCLogin {
      }
      
     public function register(){
-
         $hash = password_hash($this->password, PASSWORD_DEFAULT, ['cost' => 10]);
-
         $this->sql = "CALL sp_createUsuario('$this->nombre', '$this->APaterno', '$this->AMaterno','$this->fechaNacimiento', '$this->edad', '$this->sexo',
         '$this->email', '$this->telefono', '$this->usuario','$hash')";
         $register = $this->conn->query($this->sql);

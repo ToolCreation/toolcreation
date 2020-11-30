@@ -160,8 +160,11 @@ const LOGIN = new Vue({
                         setTimeout(function () {
                           LOGIN.limpiarAlertas();
                         }, 2500);
-                    }else{
-                        LOGIN.alertMessage("myalert alert-fail","Hubo un error al restablecer su contraseña, el correo no es valido" + response.data, "fas fa-times bg-fail");
+                    }else if(response.data.error == 'EmailNoEnviado'){
+                        LOGIN.alertMessage("myalert alert-fail", `${response.data.Detail}, el correo no es valido ` + response.data, "fas fa-times bg-fail");
+                        setTimeout(function () {
+                            LOGIN.limpiarAlertas();
+                          }, 2500);
                     }
                    
               });

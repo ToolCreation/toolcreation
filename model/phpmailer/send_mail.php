@@ -6,10 +6,17 @@ class SendEmail{
  
     private $Addemail;
     public $mail;
+    private $password;
 
-    public function setData( $Addemail){
+    public function setDataEmail( $Addemail){
         $this->Addemail = $Addemail;
+    }
+    public function getPassword(){
+        return $this->password;
+    }
 
+    public function setPassword($password) {
+        $this->password = $password;
     }
 
     public function __construct(){
@@ -24,14 +31,17 @@ class SendEmail{
         $this->CharSet='UTF8';
     }
 
-    public function sendEmail($newPass){
+    public function sendEmail(){
         $this->mail->setFrom('toolcreationhelp@gmail.com','ToolCreation Support' );
         $this->mail->addAddress( $this->Addemail);              
         $this->mail->isHTML(true);                                 
         $this->mail->Subject = 'Recuperacion de Cuenta';
-        $this->mail->Body    = 'Esta es su nuevo Password : <strong>'. $newPass .'</strong> <br> 
-                                <strong>Nota</strong>: Inicie sesion de nuevo y cambie el password en la configuracion de cuenta';
+        $this->mail->Body    = 'Esta es su nuevo Password : <strong>'. $this->password .'</strong> <br> 
+                                <strong>Nota</strong>: Inicie sesion de nuevo y cambie el password en la configuracion de cuenta.';
         return $this->mail->Send(); //bool: true ? false
     }
+
+     
+   
 }
 ?>
