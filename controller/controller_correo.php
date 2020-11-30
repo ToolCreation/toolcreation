@@ -10,14 +10,14 @@ $psswd = substr( sha1(microtime()), 1, 8);
 $email->setDataEmail($_POST['email']);
 $email->setPassword($psswd);
 
-if( $email->sendEmail($psswd)){
+if( $email->sendEmail()){
     $user->setEmail($_POST['email']);
     $user->setPassword($psswd);
     echo $user->restorePass();
 }else {
     echo json_encode(array(
         'Error' => 'EmailNoEnviado',
-        'Detail' => 'Hubo un error al enviar el correo ' .$email->sendEmail($psswd)
+        'Detail' => 'Hubo un error al enviar el correo ' .$email->sendEmail()
     ));
 }
 
