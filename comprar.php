@@ -80,7 +80,7 @@
                                 <input type="text" id="nombreTItualar" name ="nombreTItualar" placeholder ="Nombre completo" class="input-text input-100 "  >
                                 <input type="email" id="correoTitular" name ="correoTitular" placeholder ="correo" class="input-text input-100"  >
                                 <label for="" class="mt-2">
-                                    Tajeta de credido o debito
+                                    Tarjeta de credido o debito
                                 </label>
                                 <div id="card-element" class="form-control mt-1 ">
 

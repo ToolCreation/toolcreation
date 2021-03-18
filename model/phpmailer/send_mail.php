@@ -2,6 +2,7 @@
 require 'PHPMailerAutoload.php';
 
 
+
 class SendEmail{
  
     private $Addemail;

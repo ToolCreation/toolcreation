@@ -13,7 +13,7 @@ if(!empty($_POST['stripeToken'])){
   $nombreCurso = $_POST['nombreCurso'];
   $idCurso = $_POST['idCurso'];
 
-  //precios Mexicanos 
+  //precios Mexicanos USD
   if($monto >= 100){
     $nuevoMOnto = $monto * 100;
   }else if ($monto >= 1000){
